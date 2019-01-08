@@ -4,7 +4,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 import CardDeck from './CardDeck';
 import Timeline from './Timeline';
-import {answerCard} from '../../actions/gameActions';
+// import {answerCard} from '../../actions/gameActions';
 
 const update = require('immutability-helper');
 
@@ -27,10 +27,7 @@ class GameBoard extends Component {
     let activeCard = this.props.game.activeCard
     if(activeCard) {
       return (
-        <CardDeck 
-          item={activeCard}
-          handleDrop={() => this.props.answerCard(activeCard, this.props.game.cards)}
-        />    
+        <CardDeck />    
       )
     } else {
       return (
@@ -56,5 +53,5 @@ const mapStateToProps = state => ({
 })
 GameBoard = DragDropContext(HTML5Backend)(GameBoard);
 
-export default connect(mapStateToProps, {answerCard})((GameBoard));
+export default connect(mapStateToProps, {})((GameBoard));
 

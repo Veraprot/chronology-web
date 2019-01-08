@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { DragSource } from 'react-dnd';
 import { connect } from 'react-redux';
+import {answerCard} from '../../actions/gameActions';
 
 const itemSource = {
   beginDrag(props) {
-    return props.item;
+    return props.game.activeCard;
   },
   endDrag(props, monitor, component) {
     if (!monitor.didDrop()) {
       return;
     }
 
-    return props.handleDrop(props.item.id);
+    return props.answerCard(props.game.activeCard, props.game.cards)
   }
 }
 
@@ -30,7 +31,7 @@ class CardDeck extends Component {
 
     return connectDragSource(
       <div className="item" style={{ opacity }}>
-        <span>{item.date}</span>
+        <span>{this.props.game.activeCard.date}</span>
       </div>
     );
   }
@@ -42,5 +43,5 @@ const mapStateToProps = state => ({
 
 CardDeck = DragSource('item', itemSource, collect)(CardDeck);
 
-export default connect(mapStateToProps, {})((CardDeck));
+export default connect(mapStateToProps, {answerCard})((CardDeck));
 

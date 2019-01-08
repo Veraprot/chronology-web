@@ -24,8 +24,8 @@ class Timeline extends Component {
   }
 
   renderTimelineCards = () => {
-    console.log(this.props)
     let answeredCards = this.props.game.answeredCards
+    console.log(answeredCards)
     if(answeredCards) {
       return this.props.game.answeredCards.map((card, i) => (
         <TimelineCard
