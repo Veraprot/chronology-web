@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {CREATE_TIMELINE, MOVE_CARD} from './types';
+import {CREATE_TIMELINE, MOVE_ANSWERED_CARD, ANSWER_CARD} from './types';
 const baseUrl = 'http://localhost:3001/api/v1'
 
 export const createTimeline = (startDate, endDate) => dispatch => {
@@ -33,12 +33,25 @@ export const createTimeline = (startDate, endDate) => dispatch => {
     });
 }
 
-export const moveCard = (dragIndex, hoverIndex, dragItem, answeredCards, cardDeck) => dispatch => {
+export const moveAnsweredCard = (dragIndex, hoverIndex, dragItem, answeredCards, cardDeck) => dispatch => {
   dispatch({
-    type: MOVE_CARD,
+    type: MOVE_ANSWERED_CARD,
     payload: {
+      gameView: true,
       activeCard: generateRandomCard(cardDeck),
       answeredCards: getDraggedCards(answeredCards, dragIndex, hoverIndex, dragItem)
+    }
+  })
+}
+
+export const answerCard = (activeCard, cardDeck) => 
+dispatch => {
+  dispatch({
+    type: ANSWER_CARD,
+    payload: {
+      cards: cardDeck.filter(card => card.id !== activeCard.id),
+      activeCard: generateRandomCard(cardDeck),
+      answeredCards: activeCard
     }
   })
 }
@@ -48,8 +61,7 @@ const generateRandomCard = (cardStack) => {
 }
 
 const getDraggedCards = (newcards, dragIndex, hoverIndex, dragItem) => {
-  newcards.splice(dragIndex, 1); // removing what you are dragging.
-  newcards.splice(hoverIndex, 0, dragItem); // inserting it into hoverIndex.
-
+  newcards.splice(dragIndex, 1);
+  newcards.splice(hoverIndex, 0, dragItem); 
   return newcards
 }

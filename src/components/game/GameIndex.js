@@ -12,9 +12,11 @@ class GameIndex extends React.Component {
   render() {
     return (
       <>
+      { !this.props.game.gameView &&
         <GameForm/>
-        <GameBoard/>
-      </>
+      }
+      <GameBoard/>
+    </>
     )
   }
 }

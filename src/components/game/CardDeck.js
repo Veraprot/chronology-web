@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DragSource } from 'react-dnd';
+import { connect } from 'react-redux';
 
 const itemSource = {
   beginDrag(props) {
@@ -29,10 +30,17 @@ class CardDeck extends Component {
 
     return connectDragSource(
       <div className="item" style={{ opacity }}>
-        <span>{item.name}</span>
+        <span>{item.date}</span>
       </div>
     );
   }
 }
 
-export default DragSource('item', itemSource, collect)(CardDeck);
+const mapStateToProps = state => ({
+  game: state.game
+})
+
+CardDeck = DragSource('item', itemSource, collect)(CardDeck);
+
+export default connect(mapStateToProps, {})((CardDeck));
+
