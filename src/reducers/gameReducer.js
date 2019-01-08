@@ -1,4 +1,4 @@
-import { CREATE_TIMELINE } from '../actions/types';
+import { CREATE_TIMELINE, MOVE_CARD } from '../actions/types';
 
 const initialState = {
   cards: [
@@ -17,6 +17,15 @@ const initialState = {
       id: 28, date: "19500320", event: " The Polish government decides to confiscate the property of the Polish Catholic Church.", created_at: "2019-01-08T19:29:50.518Z", updated_at: "2019-01-08T19:29:50.518Z"
     }
   ],
+  activeCard: null,
+  answeredCards: [
+    {
+      id: 29, date: "19500318", event: " The Belgian government collapses as a referendum …as Belgians vote for king | date=March 18, 1950}}", created_at: "2019-01-08T19:29:50.510Z", updated_at: "2019-01-08T19:29:50.510Z"
+    },
+    {
+      id: 30, date: "19500320", event: " The Polish government decides to confiscate the property of the Polish Catholic Church.", created_at: "2019-01-08T19:29:50.518Z", updated_at: "2019-01-08T19:29:50.518Z"
+    }
+  ]
 };
 
 export default function(state = initialState, action) {
@@ -25,6 +34,14 @@ export default function(state = initialState, action) {
       return {
         ...state,
         cards: action.payload.cards,
+        activeCard: action.payload.activeCard,
+        answeredCards: action.payload.answeredCards
+      };
+      case MOVE_CARD:
+      return {
+        ...state,
+        activeCard: action.payload.activeCard,
+        answeredCards: action.payload.answeredCards
       };
     default:
       return state;

@@ -11,17 +11,25 @@ const update = require('immutability-helper');
 class GameBoard extends Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = {
       items: [
         { id: 1, name: 'Item 1' },
         { id: 2, name: 'Item 2' },
-        { id: 3, name: 'Item 3' },
-        { id: 4, name: 'Item 4' },
       ],
+      activeCard: this.props.game.cards[0],
       targetItems: [],
     }
   }
+
+  // deleteItem = id => {
+  //   let dragItem = this.state.items.find(item => item.id == id)
+  //   this.setState(prevState => {
+  //     return {
+  //       items: prevState.items.filter(item => item.id !== id),
+  //       targetItems: [...prevState.targetItems, dragItem]
+  //     }
+  //   })
+  // }
 
   deleteItem = id => {
     let dragItem = this.state.items.find(item => item.id == id)
@@ -31,6 +39,10 @@ class GameBoard extends Component {
         targetItems: [...prevState.targetItems, dragItem]
       }
     })
+  }
+
+  answerCard = () => {
+    let draggedCard = this.state.activeCard;
   }
 
   moveItem = (dragIndex, hoverIndex) => {
@@ -46,6 +58,21 @@ class GameBoard extends Component {
     )
   }
 
+  generateCardDeck = (card) => {
+    console.log(card.id)
+    return(
+      <CardDeck 
+        key={card.id}
+        item={card}
+        handleDrop={(id) => this.deleteItem(id)}
+      />
+    )
+  }
+
+  generateTimeline = (answeredCards) => {
+
+  }
+
   render() {
     return (
       <>
@@ -57,6 +84,7 @@ class GameBoard extends Component {
             handleDrop={(id) => this.deleteItem(id)}
               />
         ))}
+        {this.generateCardDeck(this.state.activeCard)}
       </div>
 
       <Timeline items={this.state.targetItems} moveItem={this.moveItem}/>

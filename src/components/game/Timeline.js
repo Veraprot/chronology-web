@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
 import TimelineCard from './TimelineCard';
+
+import { connect } from 'react-redux';
+import {moveCard} from '../../actions/gameActions';
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
@@ -12,24 +15,30 @@ function collect(connect, monitor) {
 class Timeline extends Component {
   constructor(props) {
     super(props)
+    console.log(props)
+  }
+
+  moveItem = (dragIndex, hoverIndex) => {
+    const {answeredCards} = this.props.game
+    const dragItem = answeredCards[dragIndex]
+    this.props.moveCard(dragIndex, hoverIndex, dragItem, this.props.game.answeredCards, this.props.game.cards)
   }
 
   render() {
+    console.log('here', this.props.game)
     const { connectDropTarget, hovered, item } = this.props;
     const backgroundColor = hovered ? 'lightgreen' : 'white';
-    console.log('item', this.props.item)
-    console.log('target items arr', this.props.items)
     return connectDropTarget(
       <div className="target" style={{ background: backgroundColor }}>
         Target
         <div className="item-container">
-          {this.props.items.map((item, i) => (
+          {this.props.game.answeredCards.map((card, i) => (
             <TimelineCard
-              key={item.id}
+              key={card.id}
               index={i}
-              id={item.id}
-              text={item.name}
-              moveItem={this.props.moveItem}
+              id={card.id}
+              text={card.date}
+              moveItem={this.moveItem}
             />
           ))}
         </div>
@@ -38,4 +47,10 @@ class Timeline extends Component {
   }
 }
 
-export default DropTarget('item', {}, collect)(Timeline);
+const mapStateToProps = state => ({
+  game: state.game
+})
+
+Timeline = DropTarget('item', {}, collect)(Timeline);
+
+export default connect(mapStateToProps, {moveCard})((Timeline));
