@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser } from './actions/authActions';
 import PrivateRoute from './components/common/PrivateRoute';
-import GameBoard from './components/game/GameBoard';
+import GameIndex from './components/game/GameIndex';
 import Profile from './components/profile/Profile';
 
 
@@ -50,7 +50,7 @@ class App extends Component {
             <NavBar/>
             <div className="main">
               <Route exact path='/' component={Home}/>
-              <Route exact path="/game" component={GameBoard} />
+              <Route exact path="/game" component={GameIndex} />
               <Switch>
                 <PrivateRoute exact path="/profile" component={Profile} />
               </Switch>
