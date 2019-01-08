@@ -7,20 +7,17 @@ const baseUrl = 'http://localhost:3001/api/v1'
 
 export const loginUser = userData => dispatch => {
   let body = JSON.stringify({auth: userData})
-  console.log(userData)
-  console.log(body)
   axios
     .post(
       `${baseUrl}/user_token`, 
-      {user: userData},
+      body,
       {
       headers: {
         'Content-Type': 'application/json',
       }
   })
     .then(res => {
-      console.log(res.data)
-      const { token } = res.data;
+      const token = res.data.jwt;
       localStorage.setItem('jwtToken', token);
       setAuthToken(token);
       const decoded = jwt_decode(token);
