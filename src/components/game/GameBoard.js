@@ -11,14 +11,6 @@ const update = require('immutability-helper');
 class GameBoard extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      items: [
-        { id: 1, name: 'Item 1' },
-        { id: 2, name: 'Item 2' },
-      ],
-      activeCard: this.props.game.cards[0],
-      targetItems: [],
-    }
   }
 
   deleteItem = id => {
@@ -36,7 +28,6 @@ class GameBoard extends Component {
     if(activeCard) {
       return (
         <CardDeck 
-          key={activeCard.id}
           item={activeCard}
           handleDrop={() => this.props.answerCard(activeCard, this.props.game.cards)}
         />    
@@ -54,7 +45,7 @@ class GameBoard extends Component {
         {this.renderCardDeck()}
       </div>
 
-      <Timeline items={this.state.targetItems}/>
+      <Timeline/>
       </>
     );
   }
