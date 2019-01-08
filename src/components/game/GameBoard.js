@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DragDropContext } from 'react-dnd'
+
 import CardDeck from './CardDeck';
 import Timeline from './Timeline';
 
-import HTML5Backend from 'react-dnd-html5-backend'
-import { DragDropContext } from 'react-dnd'
 const update = require('immutability-helper');
 
 class GameBoard extends Component {
-  state = {
-    items: [
-      { id: 1, name: 'Item 1' },
-      { id: 2, name: 'Item 2' },
-      { id: 3, name: 'Item 3' },
-      { id: 4, name: 'Item 4' },
-    ],
-    targetItems: [],
+  constructor(props) {
+    super(props)
+    console.log(props)
+    this.state = {
+      items: [
+        { id: 1, name: 'Item 1' },
+        { id: 2, name: 'Item 2' },
+        { id: 3, name: 'Item 3' },
+        { id: 4, name: 'Item 4' },
+      ],
+      targetItems: [],
+    }
   }
 
   deleteItem = id => {
@@ -59,4 +65,10 @@ class GameBoard extends Component {
   }
 }
 
-export default DragDropContext(HTML5Backend)(GameBoard);
+const mapStateToProps = state => ({
+  game: state.game
+})
+GameBoard = DragDropContext(HTML5Backend)(GameBoard);
+
+export default connect(mapStateToProps, {})((GameBoard));
+

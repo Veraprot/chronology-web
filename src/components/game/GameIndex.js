@@ -1,5 +1,4 @@
 import React from 'react'
-import { getProfile } from '../../actions/profileActions';
 import {connect} from 'react-redux'
 import GameForm from './GameForm'
 import GameBoard from './GameBoard'
@@ -11,6 +10,7 @@ class GameIndex extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <>
         <GameForm/>
@@ -26,6 +26,6 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, { getProfile })(
+export default connect(mapStateToProps, {})(
   (GameIndex)
 );
