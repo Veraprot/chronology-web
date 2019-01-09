@@ -15,9 +15,7 @@ const initialState = {
     {id: 27, date: "19500318", event: " The Belgian government collapses as a referendum …as Belgians vote for king | date=March 18, 1950}}", created_at: "2019-01-08T19:29:50.510Z", updated_at: "2019-01-08T19:29:50.510Z"
     },
   ],
-  activeCard: [{
-    id: 28, date: "19500320", event: " The Polish government decides to confiscate the property of the Polish Catholic Church.", created_at: "2019-01-08T19:29:50.518Z", updated_at: "2019-01-08T19:29:50.518Z"
-  }],
+  activeCard: [],
   answeredCards: [
     {
       id: 29, date: "111111111", event: " The Belgian government collapses as a referendum …as Belgians vote for king | date=March 18, 1950}}", created_at: "2019-01-08T19:29:50.510Z", updated_at: "2019-01-08T19:29:50.510Z"

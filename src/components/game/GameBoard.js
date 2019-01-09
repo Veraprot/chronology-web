@@ -47,21 +47,7 @@ class GameBoard extends Component {
             return;
         }
 
-        if (source.droppableId === destination.droppableId) {
-            const items = reorder(
-                this.getList(source.droppableId),
-                source.index,
-                destination.index
-            );
-
-            let state = { items };
-
-            if (source.droppableId === 'droppable2') {
-                state = { selected: items };
-            }
-
-            this.setState(state);
-        } else {
+        if (source.droppableId !== destination.droppableId) { 
             const result = move(
                 this.getList(source.droppableId),
                 this.getList(destination.droppableId),
