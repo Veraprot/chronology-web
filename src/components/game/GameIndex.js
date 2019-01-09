@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import GameForm from './GameForm'
-import GameBoard from './GameBoard'
-
+import GameBoardOne from './GameBoard'
 
 class GameIndex extends React.Component {
   constructor(props) {
@@ -10,12 +9,13 @@ class GameIndex extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <>
+      { !this.props.game.gameView &&
         <GameForm/>
-        <GameBoard/>
-      </>
+      }
+      <GameBoardOne/>
+    </>
     )
   }
 }

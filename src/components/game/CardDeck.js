@@ -1,38 +1,100 @@
 import React, { Component } from 'react';
-import { DragSource } from 'react-dnd';
+import ReactDOM from 'react-dom';
+import {connect} from 'react-redux'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-const itemSource = {
-  beginDrag(props) {
-    return props.item;
-  },
-  endDrag(props, monitor, component) {
-    if (!monitor.didDrop()) {
-      return;
-    }
+const grid = 8;
 
-    return props.handleDrop(props.item.id);
-  }
-}
+const getItemStyle = (isDragging, draggableStyle) => ({
+  // some basic styles to make the items look a bit nicer
+  userSelect: 'none',
 
-function collect(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging(),
-  }
-}
+  // change background colour if dragging
+  background: isDragging ? 'lightgreen' : 'grey',
 
+  // styles we need to apply on draggables
+  ...draggableStyle
+});
+
+const getListStyle = isDraggingOver => ({
+    background: isDraggingOver ? 'lightblue' : 'lightgrey',
+});
 class CardDeck extends Component {
-  render() {
-    const { isDragging, connectDragSource, item } = this.props;
-    const opacity = isDragging ? 0 : 1;
-
-    return connectDragSource(
-      <div className="item" style={{ opacity }}>
-        <span>{item.name}</span>
-      </div>
-    );
+    render() {
+      return (
+        <>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <div
+                className="card-deck-container"
+                ref={provided.innerRef}
+                style={getListStyle(snapshot.isDraggingOver)}>
+                {this.props.game.activeCard.map((card, index) => (
+                    <Draggable
+                      key={card.id}
+                      draggableId={card.id}
+                      index={index}>
+                      {(provided, snapshot) => (
+                        <div
+                            className="card-deck"
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                                snapshot.isDragging,
+                                provided.draggableProps.style
+                            )}>
+                            {`${card.event} index: ${index} id: ${card.id}`}
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+          <Droppable 
+          direction="horizontal"
+          droppableId="droppable2">
+            {(provided, snapshot) => (
+              <div
+                className="timeline-container"
+                ref={provided.innerRef}
+                style={getListStyle(snapshot.isDraggingOver)}>
+                {this.props.game.answeredCards.map((card, index) => (
+                  <Draggable
+                    key={card.id}
+                    draggableId={card.id}
+                    index={index}>
+                    {(provided, snapshot) => (
+                      <div
+                        className="timeline-card"
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={getItemStyle(
+                            snapshot.isDragging,
+                            provided.draggableProps.style
+                        )}>
+                        {`${card.event} index: ${index} id: ${card.id}`}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </>
+      );
+    }
   }
-}
 
-export default DragSource('item', itemSource, collect)(CardDeck);
+const mapStateToProps = state => ({
+  game: state.game
+});
+
+
+export default connect(mapStateToProps, {})(
+  (CardDeck)
+);

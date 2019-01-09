@@ -1,33 +1,24 @@
 .timeline-container {
   border-top: 2px solid black;
+  height: 300px;
   position: relative;
+  display: flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
 
   .timeline-card {
-    flex: 0 0 auto;
-    position: relative;
-    background-color: #F3EAC8;
-  }
-}
-
-.timeline-container,
-.card-deck-container {
-  display: flex;
-  justify-content: center;
-  height: 300px;
-
-  .card-deck,
-  .timeline-card {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 0 0 auto;
+    position: relative;
+    height: calc(100% - 40px);
+    width: 20%;
     max-width: 200px;
     margin: 0px 5px;
     padding: 16px;
-    height: calc(100% - 40px);
     border-radius: 4px;
+    background-color: #F3EAC8;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   }
 }
-

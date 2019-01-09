@@ -20,7 +20,6 @@ import Home from './components/layouts/Home'
 // Check for token
 if (localStorage.jwtToken) {
   // Set auth token header auth
-  console.log('yesss')
   setAuthToken(localStorage.jwtToken);
   // Decode token and get user info and exp
   const decoded = jwt_decode(localStorage.jwtToken);
@@ -29,9 +28,7 @@ if (localStorage.jwtToken) {
 
   // Check for expired token
   const currentTime = Date.now() / 1000;
-  if (decoded.exp < currentTime) {
-    console.log('outdated');
-    
+  if (decoded.exp < currentTime) {    
     // Logout user
     // store.dispatch(logoutUser());
     // Clear current Profile
