@@ -23,6 +23,7 @@ const reorder = (list, startIndex, endIndex) => {
  */
 const move = (source, destination, droppableSource, droppableDestination) => {
     const sourceClone = Array.from(source);
+    console.log(sourceClone)
     const destClone = Array.from(destination);
     const [removed] = sourceClone.splice(droppableSource.index, 1);
 
@@ -77,6 +78,8 @@ class Test extends Component {
     onDragEnd = result => {
         const { source, destination } = result;
 
+        console.log('destination example', destination)
+        // console.log('sourse list', this.getList(source.droppableId))
         // dropped outside the list
         if (!destination) {
             return;

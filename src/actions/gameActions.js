@@ -56,6 +56,17 @@ dispatch => {
   })
 }
 
+export const moveCard = (cards, answeredCards) => dispatch => {
+  console.log('hi')
+  dispatch({
+    type: ANSWER_CARD, 
+    payload: {
+      cards,
+      answeredCards
+    }
+  })
+}
+
 const generateRandomCard = (cardStack) => {
   return cardStack[Math.floor(Math.random() * cardStack.length)]
 }
