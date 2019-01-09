@@ -1,9 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import GameForm from './GameForm'
-import GameBoard from './GameBoard'
-import GameBoardOne from './GameBoardOne'
-import Test from './Test'
+import GameBoardOne from './GameBoard'
 
 class GameIndex extends React.Component {
   constructor(props) {
@@ -16,12 +14,8 @@ class GameIndex extends React.Component {
       { !this.props.game.gameView &&
         <GameForm/>
       }
-      {/* <GameBoard/> */}
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <GameBoardOne/>
-      </div>
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
-        <Test/>
       </div>
     </>
     )
