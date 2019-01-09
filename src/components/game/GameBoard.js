@@ -4,30 +4,28 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 import CardDeck from './CardDeck';
 import Timeline from './Timeline';
-// import {answerCard} from '../../actions/gameActions';
-
-const update = require('immutability-helper');
 
 class GameBoard extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      activatedCard: null
+    }
   }
 
-  deleteItem = id => {
-    let dragItem = this.state.items.find(item => item.id == id)
-    this.setState(prevState => {
-      return {
-        items: prevState.items.filter(item => item.id !== id),
-        targetItems: [...prevState.targetItems, dragItem]
-      }
-    })
+  activateCard = (card) => {
+    console.log('make a moving card idk')
+    this.setState({
+      activatedCard: card
+    }, console.log(this.state))
   }
 
   renderCardDeck = () => {
     let activeCard = this.props.game.activeCard
     if(activeCard) {
       return (
-        <CardDeck />    
+        <CardDeck activateCard={this.activateCard}/>    
       )
     } else {
       return (
@@ -42,7 +40,7 @@ class GameBoard extends Component {
         {this.renderCardDeck()}
       </div>
 
-      <Timeline/>
+      <Timeline activatedCard={this.state.activatedCard}/>
       </>
     );
   }

@@ -75,9 +75,6 @@ const cardTarget = {
 class TimelineCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-        item: { item: null },
-    }
   }
   
   static propTypes = {
@@ -111,14 +108,14 @@ class TimelineCard extends React.Component {
 
 export default flow(
   DragSource(
-    'item',
+    'card',
     cardSource,
     (connect, monitor) => ({
       connectDragSource: connect.dragSource(),
       isDragging: monitor.isDragging(),
     }),
   ),
-  DropTarget('item', cardTarget, (connect) => ({
+  DropTarget('card', cardTarget, (connect) => ({
     connectDropTarget: connect.dropTarget(),
   }))
 )(TimelineCard);

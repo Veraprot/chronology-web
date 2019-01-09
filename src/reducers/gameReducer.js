@@ -23,11 +23,6 @@ export default function(state = initialState, action) {
         answeredCards: action.payload.answeredCards
       };
       case ANSWER_CARD:
-      console.log(state.cards)
-      console.log(action.payload.cards)
-      console.log('---------------')
-      console.log(state.activeCard)
-      console.log(action.payload.activeCard)
       return {
         ...state,
         cards: action.payload.cards,

@@ -20,14 +20,18 @@ class Timeline extends Component {
   moveItem = (dragIndex, hoverIndex) => {
     const {answeredCards} = this.props.game
     const dragItem = answeredCards[dragIndex]
+    console.log(dragItem)
     this.props.moveAnsweredCard(dragIndex, hoverIndex, dragItem, this.props.game.answeredCards, this.props.game.cards)
   }
 
   renderTimelineCards = () => {
-    let answeredCards = this.props.game.answeredCards
-    console.log(answeredCards)
+    const {answeredCards} = this.props.game
     if(answeredCards) {
-      return this.props.game.answeredCards.map((card, i) => (
+      if(this.props.activatedCard && this.props.hovered) {
+        console.log('card is moving')
+        console.log(this.props.game)
+      }
+      return answeredCards.map((card, i) => (
         <TimelineCard
           key={card.id}
           index={i}

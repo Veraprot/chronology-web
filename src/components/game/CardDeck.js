@@ -5,14 +5,15 @@ import {answerCard} from '../../actions/gameActions';
 
 const itemSource = {
   beginDrag(props) {
+    props.activateCard(props.game.activeCard)
     return props.game.activeCard;
   },
   endDrag(props, monitor, component) {
     if (!monitor.didDrop()) {
       return;
     }
-
-    return props.answerCard(props.game.activeCard, props.game.cards)
+    props.answerCard(props.game.activeCard, props.game.cards)
+    return props.game.activeCard
   }
 }
 
@@ -28,7 +29,6 @@ class CardDeck extends Component {
   render() {
     const { isDragging, connectDragSource, item } = this.props;
     const opacity = isDragging ? 0 : 1;
-
     return connectDragSource(
       <div className="item" style={{ opacity }}>
         <span>{this.props.game.activeCard.date}</span>
