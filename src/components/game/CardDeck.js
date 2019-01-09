@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import {connect} from 'react-redux'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
-const grid = 8;
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: 'none',
 
   // change background colour if dragging
-  background: isDragging ? 'lightgreen' : 'grey',
+  background: isDragging ? 'lightgreen' : '',
 
   // styles we need to apply on draggables
   ...draggableStyle
 });
 
 const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
+    background: isDraggingOver ? 'lightblue' : '',
 });
 class CardDeck extends Component {
     render() {
@@ -27,8 +24,7 @@ class CardDeck extends Component {
             {(provided, snapshot) => (
               <div
                 className="card-deck-container"
-                ref={provided.innerRef}
-                style={getListStyle(snapshot.isDraggingOver)}>
+                ref={provided.innerRef}>
                 {this.props.game.activeCard.map((card, index) => (
                     <Draggable
                       key={card.id}

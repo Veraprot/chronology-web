@@ -7,7 +7,6 @@
   .timeline-card {
     flex: 0 0 auto;
     position: relative;
-    background-color: #F3EAC8;
   }
 }
 
@@ -22,6 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #F3EAC8;
     max-width: 200px;
     margin: 0px 5px;
     padding: 16px;
