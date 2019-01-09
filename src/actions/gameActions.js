@@ -34,7 +34,6 @@ export const createTimeline = (startDate, endDate) => dispatch => {
 }
 
 export const moveCard = ( answeredCards) => dispatch => {
-  console.log('hi')
   dispatch({
     type: ANSWER_CARD, 
     payload: {
@@ -44,7 +43,6 @@ export const moveCard = ( answeredCards) => dispatch => {
 }
 
 export const updateCard = ( cardDeck) => dispatch => {
-  console.log('hi')
   dispatch({
     type: UPDATE_ACTIVE_CARD, 
     payload: {

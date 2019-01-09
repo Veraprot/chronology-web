@@ -9,7 +9,6 @@ class GameIndex extends React.Component {
   }
 
   render() {
-    console.log(Object.keys(this.props.game.activeCard).length)
     return (
       <>
       { !this.props.game.gameView &&
