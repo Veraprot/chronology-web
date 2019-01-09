@@ -8,8 +8,6 @@ const grid = 8;
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: 'none',
-  padding: grid * 2,
-  margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
   background: isDragging ? 'lightgreen' : 'grey',
@@ -20,8 +18,6 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 
 const getListStyle = isDraggingOver => ({
     background: isDraggingOver ? 'lightblue' : 'lightgrey',
-    padding: grid,
-    width: 250
 });
 class CardDeck extends Component {
     render() {
@@ -30,6 +26,7 @@ class CardDeck extends Component {
           <Droppable droppableId="droppable">
             {(provided, snapshot) => (
               <div
+                className="card-deck-container"
                 ref={provided.innerRef}
                 style={getListStyle(snapshot.isDraggingOver)}>
                 {this.props.game.activeCard.map((card, index) => (
@@ -39,6 +36,7 @@ class CardDeck extends Component {
                       index={index}>
                       {(provided, snapshot) => (
                         <div
+                            className="card-deck"
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
@@ -55,9 +53,12 @@ class CardDeck extends Component {
               </div>
             )}
           </Droppable>
-          <Droppable droppableId="droppable2">
+          <Droppable 
+          direction="horizontal"
+          droppableId="droppable2">
             {(provided, snapshot) => (
               <div
+                className="timeline-container"
                 ref={provided.innerRef}
                 style={getListStyle(snapshot.isDraggingOver)}>
                 {this.props.game.answeredCards.map((card, index) => (
@@ -67,6 +68,7 @@ class CardDeck extends Component {
                     index={index}>
                     {(provided, snapshot) => (
                       <div
+                        className="timeline-card"
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}

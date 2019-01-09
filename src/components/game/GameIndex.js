@@ -14,9 +14,7 @@ class GameIndex extends React.Component {
       { !this.props.game.gameView &&
         <GameForm/>
       }
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
-        <GameBoardOne/>
-      </div>
+      <GameBoardOne/>
     </>
     )
   }
