@@ -33,29 +33,6 @@ export const createTimeline = (startDate, endDate) => dispatch => {
     });
 }
 
-export const moveAnsweredCard = (dragIndex, hoverIndex, dragItem, answeredCards, cardDeck) => dispatch => {
-  dispatch({
-    type: MOVE_ANSWERED_CARD,
-    payload: {
-      gameView: true,
-      activeCard: generateRandomCard(cardDeck),
-      answeredCards: getDraggedCards(answeredCards, dragIndex, hoverIndex, dragItem)
-    }
-  })
-}
-
-export const answerCard = (activeCard, cardDeck) => 
-dispatch => {
-  dispatch({
-    type: ANSWER_CARD,
-    payload: {
-      cards: cardDeck.filter(card => card.id !== activeCard.id),
-      activeCard: generateRandomCard(cardDeck),
-      answeredCards: activeCard
-    }
-  })
-}
-
 export const moveCard = (cards, answeredCards) => dispatch => {
   console.log('hi')
   dispatch({
