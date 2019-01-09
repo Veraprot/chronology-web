@@ -37,30 +37,19 @@ const grid = 8;
 
 class GameBoard extends Component {
     state = {
-        // items: getItems(10),
-        // selected: getItems(5, 10)
         items: this.props.game.activeCard,
         selected: this.props.game.answeredCards
     };
 
-    /**
-     * A semi-generic way to handle multiple lists. Matches
-     * the IDs of the droppable container to the names of the
-     * source arrays stored in the state.
-     */
     id2List = {
         droppable: 'cards',
         droppable2: 'answeredCards'
     };
 
-    // getList = id => this.state[this.id2List[id]];
     getList = id => this.props.game[this.id2List[id]];
 
     onDragEnd = result => {
         const { source, destination } = result;
-        console.log('my destination', destination)
-        // console.log('my list', this.getList(source.droppableId))
-        // dropped outside the list
         if (!destination) {
             return;
         }
@@ -80,7 +69,6 @@ class GameBoard extends Component {
 
             this.setState(state);
         } else {
-          console.log('here')
             const result = move(
                 this.getList(source.droppableId),
                 this.getList(destination.droppableId),
