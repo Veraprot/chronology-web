@@ -32,7 +32,7 @@ class CardDeck extends Component {
               <div
                 ref={provided.innerRef}
                 style={getListStyle(snapshot.isDraggingOver)}>
-                {this.props.game.cards.map((card, index) => (
+                {this.props.game.activeCard.map((card, index) => (
                     <Draggable
                       key={card.id}
                       draggableId={card.id}

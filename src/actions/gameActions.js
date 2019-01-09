@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {CREATE_TIMELINE, MOVE_ANSWERED_CARD, ANSWER_CARD} from './types';
+import {CREATE_TIMELINE, UPDATE_ACTIVE_CARD, ANSWER_CARD} from './types';
 const baseUrl = 'http://localhost:3001/api/v1'
 
 export const createTimeline = (startDate, endDate) => dispatch => {
@@ -23,7 +23,7 @@ export const createTimeline = (startDate, endDate) => dispatch => {
             endDate
           },
           cards: res.data,
-          activeCard: generateRandomCard(res.data),
+          activeCard: [generateRandomCard(res.data)],
           answeredCards: generateRandomCard(res.data)
         }
       })
@@ -33,13 +33,22 @@ export const createTimeline = (startDate, endDate) => dispatch => {
     });
 }
 
-export const moveCard = (cards, answeredCards) => dispatch => {
+export const moveCard = ( answeredCards) => dispatch => {
   console.log('hi')
   dispatch({
     type: ANSWER_CARD, 
     payload: {
-      cards,
       answeredCards
+    }
+  })
+}
+
+export const updateCard = ( cardDeck) => dispatch => {
+  console.log('hi')
+  dispatch({
+    type: UPDATE_ACTIVE_CARD, 
+    payload: {
+      activeCard: [generateRandomCard(cardDeck)],
     }
   })
 }

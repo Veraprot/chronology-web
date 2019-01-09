@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {connect} from 'react-redux'
 import CardDeck from './CardDeck'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import {moveCard } from '../../actions/gameActions';
+import {moveCard, updateCard } from '../../actions/gameActions';
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -18,9 +18,7 @@ const reorder = (list, startIndex, endIndex) => {
  * Moves an item from one list to another list.
  */
 const move = (source, destination, droppableSource, droppableDestination) => {
-    console.log(source)
     const sourceClone = Array.from(source);
-    console.log(sourceClone)
     const destClone = Array.from(destination);
     const [removed] = sourceClone.splice(droppableSource.index, 1);
 
@@ -36,13 +34,8 @@ const grid = 8;
 
 
 class GameBoard extends Component {
-    state = {
-        items: this.props.game.activeCard,
-        selected: this.props.game.answeredCards
-    };
-
     id2List = {
-        droppable: 'cards',
+        droppable: 'activeCard',
         droppable2: 'answeredCards'
     };
 
@@ -75,7 +68,8 @@ class GameBoard extends Component {
                 source,
                 destination
             );
-            this.props.moveCard(result.droppable, result.droppable2);
+            this.props.moveCard(result.droppable2);
+            this.props.updateCard(this.props.game.cards)
         }
     };
 
@@ -93,6 +87,6 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, {moveCard})(
+export default connect(mapStateToProps, {moveCard, updateCard})(
   (GameBoard)
 );
