@@ -13,7 +13,7 @@
     margin-top: 20px;
   
     .timeline-card {
-      background-color: #F3EAC8;
+      background-color: #f5e399;
       box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
       flex-direction: column;
       justify-content: space-evenly;
@@ -64,15 +64,16 @@
           backface-visibility: hidden;
           border-radius: 4px;
           color: black;
-          background-color: #F3EAC8;
           font-size: 16px;
         }
 
         .flip-card-front {
           z-index: 2;
+          background-color:#f5e399;
         }
         
         .flip-card-back {
+          background-color: #cf5f54;
           transform: rotateY(180deg);
           z-index: 1;
         }

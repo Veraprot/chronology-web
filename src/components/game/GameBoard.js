@@ -56,12 +56,13 @@ class GameBoard extends Component {
         this.setState({
           answered: false
         })
-        this.props.updateCard(this.props.game.cards);
       }, 2000);
 
-      // setTimeout(() => {
-      //   this.props.updateCard(this.props.game.cards);
-      // }, 1000);
+      //weird but works for card animation
+      setTimeout(() => {
+        console.log('this runs')
+        this.props.updateCard(this.props.game.cards);
+      }, 2360);
     }
   };
 
