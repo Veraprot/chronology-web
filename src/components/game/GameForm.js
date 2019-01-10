@@ -1,7 +1,6 @@
 import React from 'react'
 import { Input, Button, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import {createTimeline } from '../../actions/gameActions';
 
 import { isValidDate } from '../../validation/is-valid-date'
