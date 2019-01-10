@@ -16,13 +16,13 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 const getListStyle = isDraggingOver => ({
     background: isDraggingOver ? 'lightblue' : '',
 });
-class CardDeck extends Component {
+class Timeline extends Component {
     render() {
       return (
         <>
           <Droppable 
           direction="horizontal"
-          droppableId="droppable2">
+          droppableId="answeredCards">
             {(provided, snapshot) => (
               <div
                 className="timeline-container"
@@ -30,9 +30,11 @@ class CardDeck extends Component {
                 style={getListStyle(snapshot.isDraggingOver)}>
                 {this.props.game.answeredCards.map((card, index) => (
                   <Draggable
+                    isDragDisabled={this.props.disabled}
                     key={card.id}
                     draggableId={card.id}
-                    index={index}>
+                    index={index}
+                    date={card.date}>
                     {(provided, snapshot) => (
                       <div
                         className="timeline-card"
@@ -43,7 +45,7 @@ class CardDeck extends Component {
                             snapshot.isDragging,
                             provided.draggableProps.style
                         )}>
-                        {`${card.event} index: ${index} id: ${card.id}`}
+                        {`index: ${index} id: ${card.date}`}
                       </div>
                     )}
                   </Draggable>
@@ -63,5 +65,5 @@ const mapStateToProps = state => ({
 
 
 export default connect(mapStateToProps, {})(
-  (CardDeck)
+  (Timeline)
 );

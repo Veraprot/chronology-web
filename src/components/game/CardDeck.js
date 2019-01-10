@@ -17,7 +17,7 @@ class CardDeck extends Component {
         <>
           <Droppable 
           direction="horizontal"
-          droppableId="droppable">
+          droppableId="activeCard">
             {(provided, snapshot) => (
               <div
                 className="card-deck-container"
@@ -26,7 +26,9 @@ class CardDeck extends Component {
                     <Draggable
                       key={card.id}
                       draggableId={card.id}
-                      index={index}>
+                      index={index}
+                      date={card.date}
+                      >
                       {(provided, snapshot) => (
                         <div
                             className="card-deck"
@@ -37,7 +39,7 @@ class CardDeck extends Component {
                                 snapshot.isDragging,
                                 provided.draggableProps.style
                             )}>
-                            {`${card.event} index: ${index} id: ${card.id}`}
+                            {`index: ${index} id: ${card.date}`}
                         </div>
                       )}
                     </Draggable>
