@@ -18,7 +18,7 @@ const checkAnswer = (activeCard, destination, droppableDestination ) => {
     let cardAfter = destination[droppableDestination.index].date
     return activeCard.date > cardBefore && activeCard.date < cardAfter
   }
-}
+} //this is ugly fix it 
 
 class GameBoard extends Component {
   constructor(props) {
@@ -51,6 +51,17 @@ class GameBoard extends Component {
       this.setState({
         answered: true
       })
+
+      setTimeout(() => {
+        this.setState({
+          answered: false
+        })
+        this.props.updateCard(this.props.game.cards);
+      }, 2000);
+
+      // setTimeout(() => {
+      //   this.props.updateCard(this.props.game.cards);
+      // }, 1000);
     }
   };
 
