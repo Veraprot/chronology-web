@@ -26,28 +26,20 @@ class GameBoard extends Component {
     answeredCards: 'answeredCards'
   };
 
-  move = (source, destination, droppableSource, droppableDestination) => {
-    const sourceClone = Array.from(source);
-    const destClone = Array.from(destination);
+  move = (question, timelineCards, droppableSource, droppableDestination) => {
+    const questionCard = Array.from(question);
+    const answeredCards = Array.from(timelineCards);
   
-    const [activeCard] = sourceClone.splice(droppableSource.index, 1); 
-    console.log('active card', activeCard)
-    const answer = checkAnswer(activeCard, destination, droppableDestination);
-    console.log(answer)
+    const [activeCard] = questionCard.splice(droppableSource.index, 1); 
+    const answer = checkAnswer(activeCard, timelineCards, droppableDestination);
   
-    const result = {};
     if(answer) {
-      destClone.splice(droppableDestination.index, 0, activeCard);
-      result[droppableSource.droppableId] = sourceClone;
-      result[droppableDestination.droppableId] = destClone;
-      this.props.moveCard(result.answeredCards)
+      answeredCards.splice(droppableDestination.index, 0, activeCard);      
+      this.props.moveCard(answeredCards)
       this.props.updateCard(this.props.game.cards);
     } else {
-      result[droppableSource.droppableId] = activeCard;
-      result[droppableDestination.droppableId] = destClone;
+      console.log('answer incorrect do something here')
     }
-    console.log(result)
-    return result;
   };
 
   getList = id => this.props.game[this.id2List[id]];
@@ -59,7 +51,7 @@ class GameBoard extends Component {
     }
 
     if (source.droppableId !== destination.droppableId) { 
-      const result = this.move(
+      this.move(
         this.getList(source.droppableId),
         this.getList(destination.droppableId),
         source,

@@ -39,7 +39,7 @@ class CardDeck extends Component {
                                 snapshot.isDragging,
                                 provided.draggableProps.style
                             )}>
-                            {`index: ${index} id: ${card.date}`}
+                              {`${card.event}`}
                         </div>
                       )}
                     </Draggable>

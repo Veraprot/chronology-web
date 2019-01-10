@@ -11,6 +11,8 @@
     overflow-x: scroll;
   
     .timeline-card {
+      flex-direction: column;
+      justify-content: space-evenly;
       flex: 0 0 auto;
       position: relative;
       margin: 10px 5px;
@@ -19,6 +21,10 @@
   
   .card-deck-container {
     margin: 20px 0px 20px 60%;
+
+    .card-deck {
+      justify-content: center;
+    }
   }
   
   .timeline-container,
@@ -30,7 +36,6 @@
     .timeline-card {
       display: flex;
       align-items: center;
-      justify-content: center;
       background-color: #F3EAC8;
       max-width: 200px;
       padding: 16px;

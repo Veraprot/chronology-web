@@ -45,7 +45,12 @@ class Timeline extends Component {
                             snapshot.isDragging,
                             provided.draggableProps.style
                         )}>
-                        {`index: ${index} id: ${card.date}`}
+                        <div className="card-event">
+                          {`${card.event}`}
+                        </div>
+                        <div className="card-date">
+                          {`${card.date}`}
+                        </div>
                       </div>
                     )}
                   </Draggable>
