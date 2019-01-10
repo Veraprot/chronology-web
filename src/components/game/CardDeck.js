@@ -8,14 +8,9 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 
   // change background colour if dragging
   background: isDragging ? 'lightgreen' : '',
-
-  // styles we need to apply on draggables
   ...draggableStyle
 });
 
-const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : '',
-});
 class CardDeck extends Component {
     render() {
       return (
@@ -46,38 +41,6 @@ class CardDeck extends Component {
                     </Draggable>
                   ))}
                   {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-          <Droppable 
-          direction="horizontal"
-          droppableId="droppable2">
-            {(provided, snapshot) => (
-              <div
-                className="timeline-container"
-                ref={provided.innerRef}
-                style={getListStyle(snapshot.isDraggingOver)}>
-                {this.props.game.answeredCards.map((card, index) => (
-                  <Draggable
-                    key={card.id}
-                    draggableId={card.id}
-                    index={index}>
-                    {(provided, snapshot) => (
-                      <div
-                        className="timeline-card"
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={getItemStyle(
-                            snapshot.isDragging,
-                            provided.draggableProps.style
-                        )}>
-                        {`${card.event} index: ${index} id: ${card.id}`}
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
               </div>
             )}
           </Droppable>

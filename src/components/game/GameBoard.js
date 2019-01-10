@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import CardDeck from './CardDeck'
+import Timeline from './Timeline'
 import { DragDropContext } from 'react-beautiful-dnd';
 import {moveCard, updateCard } from '../../actions/gameActions';
 
@@ -51,6 +52,7 @@ class GameBoard extends Component {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <CardDeck onDragEnd={this.onDragEnd}/>
+        <Timeline onDragEnd={this.onDragEnd}/> 
       </DragDropContext>
     );
   }
