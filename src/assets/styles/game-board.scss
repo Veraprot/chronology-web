@@ -7,7 +7,12 @@
   .timeline-card {
     flex: 0 0 auto;
     position: relative;
+    margin: 10px 5px;
   }
+}
+
+.card-deck-container {
+  margin: 20px 0px;
 }
 
 .timeline-container,
@@ -16,6 +21,7 @@
   justify-content: center;
   height: 300px;
 
+
   .card-deck,
   .timeline-card {
     display: flex;
@@ -23,7 +29,6 @@
     justify-content: center;
     background-color: #F3EAC8;
     max-width: 200px;
-    margin: 0px 5px;
     padding: 16px;
     height: calc(100% - 40px);
     border-radius: 4px;

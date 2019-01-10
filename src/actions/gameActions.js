@@ -22,6 +22,7 @@ export const createTimeline = (startDate, endDate) => dispatch => {
             startDate, 
             endDate
           },
+          gameView: true,
           cards: res.data,
           activeCard: [generateRandomCard(res.data)],
           answeredCards: generateRandomCard(res.data)

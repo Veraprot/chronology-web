@@ -12,6 +12,7 @@ export default function(state = initialState, action) {
     case CREATE_TIMELINE:
       return {
         ...state,
+        gameView: action.payload.gameView,
         cards: action.payload.cards,
         activeCard: action.payload.activeCard,
         answeredCards: [action.payload.answeredCards]
