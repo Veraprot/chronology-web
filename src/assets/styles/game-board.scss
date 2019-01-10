@@ -9,6 +9,8 @@
     position: relative;
     flex-wrap: nowrap;
     overflow-x: scroll;
+    width: 100%;
+    margin-top: 20px;
   
     .timeline-card {
       background-color: #F3EAC8;
@@ -23,7 +25,8 @@
   }
   
   .card-deck-container {
-    margin: 20px 0px 20px 60%;
+    width: 60%;
+    margin: 20px 0px 20px 40%;
 
     .card-deck {
       justify-content: center;
@@ -75,15 +78,12 @@
   
   .timeline-container,
   .card-deck-container {
-    height: 300px;
-    width: 100%;
-  
     .card-deck,
     .timeline-card {
       display: flex;
       align-items: center;
+      height: 300px;
       max-width: 200px;
-      height: calc(100% - 40px);
       border-radius: 4px;
     }
   }
