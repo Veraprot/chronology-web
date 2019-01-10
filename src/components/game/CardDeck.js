@@ -15,7 +15,9 @@ class CardDeck extends Component {
     render() {
       return (
         <>
-          <Droppable droppableId="droppable">
+          <Droppable 
+          direction="horizontal"
+          droppableId="droppable">
             {(provided, snapshot) => (
               <div
                 className="card-deck-container"

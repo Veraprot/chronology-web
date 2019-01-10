@@ -51,8 +51,10 @@ class GameBoard extends Component {
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <CardDeck onDragEnd={this.onDragEnd}/>
-        <Timeline onDragEnd={this.onDragEnd}/> 
+        <div className="board-container">
+          <CardDeck onDragEnd={this.onDragEnd}/>
+          <Timeline onDragEnd={this.onDragEnd}/> 
+        </div>
       </DragDropContext>
     );
   }
