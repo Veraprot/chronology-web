@@ -1,4 +1,4 @@
-import { CREATE_TIMELINE, MOVE_ANSWERED_CARD, ANSWER_CARD, UPDATE_ACTIVE_CARD } from '../actions/types';
+import { CREATE_TIMELINE, ANSWER_CARD, UPDATE_ACTIVE_CARD } from '../actions/types';
 
 const initialState = {
   gameView: false,
