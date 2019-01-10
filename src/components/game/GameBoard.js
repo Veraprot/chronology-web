@@ -21,6 +21,13 @@ const checkAnswer = (activeCard, destination, droppableDestination ) => {
 }
 
 class GameBoard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      answered: false //rename this later 
+    }
+  }
+
   id2List = {
     activeCard: 'activeCard',
     answeredCards: 'answeredCards'
@@ -34,11 +41,16 @@ class GameBoard extends Component {
     const answer = checkAnswer(activeCard, timelineCards, droppableDestination);
   
     if(answer) {
+      this.setState({
+        answered: false
+      })
       answeredCards.splice(droppableDestination.index, 0, activeCard);      
       this.props.moveCard(answeredCards)
       this.props.updateCard(this.props.game.cards);
     } else {
-      console.log('answer incorrect do something here')
+      this.setState({
+        answered: true
+      })
     }
   };
 
@@ -64,7 +76,7 @@ class GameBoard extends Component {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div className="board-container">
-          <CardDeck onDragEnd={this.onDragEnd}/>
+          <CardDeck onDragEnd={this.onDragEnd} answered={this.state.answered}/>
           <Timeline onDragEnd={this.onDragEnd} disabled={true}/> 
         </div>
       </DragDropContext>

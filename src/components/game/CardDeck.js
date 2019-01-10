@@ -12,46 +12,53 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 
 class CardDeck extends Component {
-    render() {
-      return (
-        <>
-          <Droppable 
-          direction="horizontal"
-          droppableId="activeCard">
-            {(provided, snapshot) => (
-              <div
-                className="card-deck-container"
-                ref={provided.innerRef}>
-                {this.props.game.activeCard.map((card, index) => (
-                    <Draggable
-                      key={card.id}
-                      draggableId={card.id}
-                      index={index}
-                      date={card.date}
-                      >
-                      {(provided, snapshot) => (
-                        <div
-                            className="card-deck"
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={getItemStyle(
-                                snapshot.isDragging,
-                                provided.draggableProps.style
-                            )}>
-                              {`${card.event}`}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </>
-      );
-    }
+  render() {
+    return (
+      <>
+        <Droppable 
+        direction="horizontal"
+        droppableId="activeCard">
+          {(provided, snapshot) => (
+            <div
+              className="card-deck-container"
+              ref={provided.innerRef}>
+              {this.props.game.activeCard.map((card, index) => (
+                  <Draggable
+                    key={card.id}
+                    draggableId={card.id}
+                    index={index}
+                    date={card.date}
+                    >
+                    {(provided, snapshot) => (
+                      <div
+                          className={this.props.answered ? "card-deck answered": "card-deck"}
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                          )}>
+                          <div className="flip-card-inner">
+                            <div className="flip-card-front">
+                               {`${card.event}`} 
+                            </div>
+                            <div className="flip-card-back">
+                              {`${card.date}`}
+                            </div>
+                          </div>
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </>
+    );
   }
+}
 
 const mapStateToProps = state => ({
   game: state.game
