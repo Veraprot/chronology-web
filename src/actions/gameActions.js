@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {CREATE_TIMELINE, UPDATE_ACTIVE_CARD, ANSWER_CARD} from './types';
+import {CREATE_TIMELINE, UPDATE_ACTIVE_CARD, ANSWER_CARD, END_GAME} from './types';
 const baseUrl = 'http://localhost:3001/api/v1'
 
 export const createTimeline = (startDate, endDate) => dispatch => {
@@ -23,6 +23,7 @@ export const createTimeline = (startDate, endDate) => dispatch => {
             endDate
           },
           gameView: true,
+          gameStatus: 'in progress',
           cards: res.data,
           activeCard: [generateRandomCard(res.data)],
           answeredCards: generateRandomCard(res.data)
@@ -48,6 +49,15 @@ export const updateCard = ( cardDeck) => dispatch => {
     type: UPDATE_ACTIVE_CARD, 
     payload: {
       activeCard: [generateRandomCard(cardDeck)],
+    }
+  })
+}
+
+export const endGame = () => dispatch => {
+  dispatch({
+    type: END_GAME, 
+    payload: {
+      gameStatus: 'ended'
     }
   })
 }

@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import GameForm from './GameForm'
-import GameBoardOne from './GameBoard'
+import GameBoard from './GameBoard'
+import GameOver from './GameOver'
 
 class GameIndex extends React.Component {
   constructor(props) {
@@ -11,15 +12,19 @@ class GameIndex extends React.Component {
   render() {
     return (
       <>
-      { !this.props.game.gameView &&
+      { this.props.game.gameStatus === 'inactive' &&
         <GameForm/>
       }
-      <GameBoardOne/>
+      { this.props.game.gameStatus === 'in progress' &&
+        <GameBoard/>
+      }
+      { this.props.game.gameStatus === 'ended' &&
+        <GameOver/>
+      }
     </>
     )
   }
 }
-
 
 const mapStateToProps = state => ({
   game: state.game

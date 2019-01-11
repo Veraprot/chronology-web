@@ -1,7 +1,11 @@
-import { CREATE_TIMELINE, ANSWER_CARD, UPDATE_ACTIVE_CARD } from '../actions/types';
+import { CREATE_TIMELINE, ANSWER_CARD, UPDATE_ACTIVE_CARD, END_GAME } from '../actions/types';
 
 const initialState = {
   gameView: false,
+  gameStatus: 'inactive',
+  score: 0,
+  moves: 0,
+  timelineLimit: 2,
   cards: [],
   activeCard: [],
   answeredCards: []
@@ -13,6 +17,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         gameView: action.payload.gameView,
+        gameStatus: action.payload.gameStatus,
         cards: action.payload.cards,
         activeCard: action.payload.activeCard,
         answeredCards: [action.payload.answeredCards]
@@ -28,6 +33,11 @@ export default function(state = initialState, action) {
           ...state,
           activeCard: action.payload.activeCard
         };
+      case END_GAME:
+      return {
+        ...state,
+        gameStatus: action.payload.gameStatus
+      };
     default:
       return state;
   }
