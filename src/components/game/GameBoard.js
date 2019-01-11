@@ -1,83 +1,107 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import {connect} from 'react-redux'
 import CardDeck from './CardDeck'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import {moveCard, updateCard } from '../../actions/gameActions';
+import Timeline from './Timeline'
+import { DragDropContext } from 'react-beautiful-dnd';
+import {registerUserMove, moveCard, updateCard, endGame } from '../../actions/gameActions';
 
-// a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-
-    return result;
-};
-
-/**
- * Moves an item from one list to another list.
- */
-const move = (source, destination, droppableSource, droppableDestination) => {
-    const sourceClone = Array.from(source);
-    const destClone = Array.from(destination);
-    const [removed] = sourceClone.splice(droppableSource.index, 1);
-
-    destClone.splice(droppableDestination.index, 0, removed);
-
-    const result = {};
-    result[droppableSource.droppableId] = sourceClone;
-    result[droppableDestination.droppableId] = destClone;
-    return result;
-};
-
-const grid = 8;
-
+const checkAnswer = (activeCard, destination, droppableDestination ) => {
+  if( droppableDestination.index == 0 ) {
+    let dateAfter = destination[droppableDestination.index].date
+    return activeCard.date < dateAfter
+  } else 
+    if(droppableDestination.index == destination.length) {
+    let cardBefore = destination[droppableDestination.index - 1].date
+    return activeCard.date > cardBefore
+  } else {
+    let cardBefore = destination[droppableDestination.index - 1].date
+    let cardAfter = destination[droppableDestination.index].date
+    return activeCard.date > cardBefore && activeCard.date < cardAfter
+  }
+} //this is ugly fix it 
 
 class GameBoard extends Component {
-    id2List = {
-        droppable: 'activeCard',
-        droppable2: 'answeredCards'
-    };
+  constructor(props) {
+    super(props)
+    this.state = {
+      answered: false //rename this later 
+    }
+  }
 
-    getList = id => this.props.game[this.id2List[id]];
+  id2List = {
+    activeCard: 'activeCard',
+    answeredCards: 'answeredCards'
+  };
 
-    onDragEnd = result => {
-        const { source, destination } = result;
-        if (!destination) {
-            return;
-        }
+  move = (question, timelineCards, droppableSource, droppableDestination) => {
+    this.props.registerUserMove(this.props.game.moves)
+    const questionCard = Array.from(question);
+    const answeredCards = Array.from(timelineCards);
+  
+    const [activeCard] = questionCard.splice(droppableSource.index, 1); 
+    const answer = checkAnswer(activeCard, timelineCards, droppableDestination);
+  
+    if(answer) {
+      this.setState({
+        answered: false
+      })
+      answeredCards.splice(droppableDestination.index, 0, activeCard);     
+      console.log(answeredCards)
+      this.props.moveCard(answeredCards)
 
-        if (source.droppableId === destination.droppableId) {
-            const items = reorder(
-                this.getList(source.droppableId),
-                source.index,
-                destination.index
-            );
+      if(answeredCards.length == this.props.game.timelineLimit) {
+        setTimeout(() => {
+          console.log('game finished')
+          this.props.endGame(this.props.game.moves, this.props.game.timelineLimit);
+        }, 1000)
+      } else {
+        this.props.updateCard(this.props.game.cards);
+      }
+    } else {
+      this.setState({
+        answered: true
+      })
 
-            let state = { items };
+      setTimeout(() => {
+        this.setState({
+          answered: false
+        })
+      }, 2000);
 
-            if (source.droppableId === 'droppable2') {
-                state = { selected: items };
-            }
+      //weird but works for card animation
+      setTimeout(() => {
+        console.log('this runs')
+        this.props.updateCard(this.props.game.cards);
+      }, 2360);
+    }
+  };
 
-            this.setState(state);
-        } else {
-            const result = move(
-                this.getList(source.droppableId),
-                this.getList(destination.droppableId),
-                source,
-                destination
-            );
-            this.props.moveCard(result.droppable2);
-            this.props.updateCard(this.props.game.cards)
-        }
-    };
+  getList = id => this.props.game[this.id2List[id]];
+
+  onDragEnd = result => {
+    const { source, destination } = result;
+    if (!destination) {
+        return;
+    }
+
+    if (source.droppableId !== destination.droppableId) { 
+      this.move(
+        this.getList(source.droppableId),
+        this.getList(destination.droppableId),
+        source,
+        destination
+      );
+    }
+  };
 
   render() {
     return (
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <CardDeck onDragEnd={this.onDragEnd}/>
-        </DragDropContext>
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <div className="board-container">
+          <CardDeck onDragEnd={this.onDragEnd} answered={this.state.answered}/>
+          <Timeline onDragEnd={this.onDragEnd} disabled={true}/> 
+        </div>
+      </DragDropContext>
     );
   }
 }
@@ -87,6 +111,6 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, {moveCard, updateCard})(
+export default connect(mapStateToProps, {registerUserMove,moveCard, updateCard, endGame})(
   (GameBoard)
 );

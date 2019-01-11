@@ -2,8 +2,13 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  visibility: visible;
   height: 60px;
   background-color: black;
+
+  &.game-mode {
+    display: none;
+  }
 
   .nav-link {
     color: white;

@@ -1,31 +1,14 @@
-import { CREATE_TIMELINE, MOVE_ANSWERED_CARD, ANSWER_CARD, UPDATE_ACTIVE_CARD } from '../actions/types';
+import { CREATE_TIMELINE, ANSWER_CARD, UPDATE_ACTIVE_CARD, REGISTER_MOVE, END_GAME } from '../actions/types';
 
 const initialState = {
   gameView: false,
-  cards: [
-    {
-      id: 24, date: "19500312", event: " A plane carrying returning rugby fans from Irelan… crashes near Llandow, with the loss of 80 lives.", created_at: "2019-01-08T19:29:50.476Z", updated_at: "2019-01-08T19:29:50.476Z"
-    },
-    {
-      id: 25, date: "19500314", event: " The ship ''Cygnet'' hits a mine off the Dutch coast.", created_at: "2019-01-08T19:29:50.502Z", updated_at: "2019-01-08T19:29:50.502Z"
-    },
-    {
-      id: 26, date: "19500317", event: " University of California, Berkeley researchers an…nt 98, which they have named quotcaliforniumquot.", created_at: "2019-01-08T19:29:50.506Z", updated_at: "2019-01-08T19:29:50.506Z"
-    },
-    {id: 27, date: "19500318", event: " The Belgian government collapses as a referendum …as Belgians vote for king | date=March 18, 1950}}", created_at: "2019-01-08T19:29:50.510Z", updated_at: "2019-01-08T19:29:50.510Z"
-    },
-  ],
-  activeCard: [{
-    id: 28, date: "19500320", event: " The Polish government decides to confiscate the property of the Polish Catholic Church.", created_at: "2019-01-08T19:29:50.518Z", updated_at: "2019-01-08T19:29:50.518Z"
-  }],
-  answeredCards: [
-    {
-      id: 29, date: "111111111", event: " The Belgian government collapses as a referendum …as Belgians vote for king | date=March 18, 1950}}", created_at: "2019-01-08T19:29:50.510Z", updated_at: "2019-01-08T19:29:50.510Z"
-    },
-    {
-      id: 30, date: "22222222", event: " The Polish government decides to confiscate the property of the Polish Catholic Church.", created_at: "2019-01-08T19:29:50.518Z", updated_at: "2019-01-08T19:29:50.518Z"
-    }
-  ]
+  gameStatus: 'inactive',
+  score: 0,
+  moves: 0,
+  timelineLimit: 3,
+  cards: [],
+  activeCard: [],
+  answeredCards: []
 };
 
 export default function(state = initialState, action) {
@@ -33,6 +16,8 @@ export default function(state = initialState, action) {
     case CREATE_TIMELINE:
       return {
         ...state,
+        gameView: action.payload.gameView,
+        gameStatus: action.payload.gameStatus,
         cards: action.payload.cards,
         activeCard: action.payload.activeCard,
         answeredCards: [action.payload.answeredCards]
@@ -48,6 +33,19 @@ export default function(state = initialState, action) {
           ...state,
           activeCard: action.payload.activeCard
         };
+      case REGISTER_MOVE:
+      return {
+        ...state,
+        moves: action.payload.moves
+      };
+      case END_GAME:
+      console.log(state)
+      console.log(action.payload.score)
+      return {
+        ...state,
+        gameStatus: action.payload.gameStatus,
+        score: action.payload.score
+      };
     default:
       return state;
   }

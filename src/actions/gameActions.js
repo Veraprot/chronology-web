@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {CREATE_TIMELINE, UPDATE_ACTIVE_CARD, ANSWER_CARD} from './types';
+import {CREATE_TIMELINE, REGISTER_MOVE, UPDATE_ACTIVE_CARD, ANSWER_CARD, END_GAME} from './types';
 const baseUrl = 'http://localhost:3001/api/v1'
 
 export const createTimeline = (startDate, endDate) => dispatch => {
@@ -22,6 +22,8 @@ export const createTimeline = (startDate, endDate) => dispatch => {
             startDate, 
             endDate
           },
+          gameView: true,
+          gameStatus: 'in progress',
           cards: res.data,
           activeCard: [generateRandomCard(res.data)],
           answeredCards: generateRandomCard(res.data)
@@ -33,8 +35,16 @@ export const createTimeline = (startDate, endDate) => dispatch => {
     });
 }
 
+export const registerUserMove = (moves) => dispatch => {
+  dispatch({
+    type: REGISTER_MOVE, 
+    payload: {
+      moves: moves + 1
+    }
+  })
+}
+
 export const moveCard = ( answeredCards) => dispatch => {
-  console.log('hi')
   dispatch({
     type: ANSWER_CARD, 
     payload: {
@@ -43,8 +53,7 @@ export const moveCard = ( answeredCards) => dispatch => {
   })
 }
 
-export const updateCard = ( cardDeck) => dispatch => {
-  console.log('hi')
+export const updateCard = (cardDeck) => dispatch => {
   dispatch({
     type: UPDATE_ACTIVE_CARD, 
     payload: {
@@ -53,12 +62,20 @@ export const updateCard = ( cardDeck) => dispatch => {
   })
 }
 
+export const endGame = (moves, timelineLimit) => dispatch => {
+  dispatch({
+    type: END_GAME, 
+    payload: {
+      gameStatus: 'ended',
+      score: calculateUserScore(moves, timelineLimit)
+    }
+  })
+}
+
 const generateRandomCard = (cardStack) => {
   return cardStack[Math.floor(Math.random() * cardStack.length)]
 }
 
-const getDraggedCards = (newcards, dragIndex, hoverIndex, dragItem) => {
-  newcards.splice(dragIndex, 1);
-  newcards.splice(hoverIndex, 0, dragItem); 
-  return newcards
+const calculateUserScore = (moves, timelineLimit) => {
+  return Math.ceil(moves/timelineLimit * 100)
 }
