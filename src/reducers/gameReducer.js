@@ -1,11 +1,11 @@
-import { CREATE_TIMELINE, ANSWER_CARD, UPDATE_ACTIVE_CARD, END_GAME } from '../actions/types';
+import { CREATE_TIMELINE, ANSWER_CARD, UPDATE_ACTIVE_CARD, REGISTER_MOVE, END_GAME } from '../actions/types';
 
 const initialState = {
   gameView: false,
   gameStatus: 'inactive',
   score: 0,
   moves: 0,
-  timelineLimit: 2,
+  timelineLimit: 3,
   cards: [],
   activeCard: [],
   answeredCards: []
@@ -33,10 +33,18 @@ export default function(state = initialState, action) {
           ...state,
           activeCard: action.payload.activeCard
         };
-      case END_GAME:
+      case REGISTER_MOVE:
       return {
         ...state,
-        gameStatus: action.payload.gameStatus
+        moves: action.payload.moves
+      };
+      case END_GAME:
+      console.log(state)
+      console.log(action.payload.score)
+      return {
+        ...state,
+        gameStatus: action.payload.gameStatus,
+        score: action.payload.score
       };
     default:
       return state;

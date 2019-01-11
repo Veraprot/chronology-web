@@ -6,7 +6,11 @@ class GameOver extends React.Component {
     return (
       <div className="modal-wrapper">
         <div className="modal-container">
-          <div>hello</div>
+          <div>Game over</div>
+          <div className="end-game-container">
+            <h3>Number of moves: {this.props.game.moves}</h3>
+            <h3>Score: {this.props.game.score}</h3>
+          </div>
         </div>
       </div>
     )

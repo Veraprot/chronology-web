@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import CardDeck from './CardDeck'
 import Timeline from './Timeline'
 import { DragDropContext } from 'react-beautiful-dnd';
-import {moveCard, updateCard, endGame } from '../../actions/gameActions';
+import {registerUserMove, moveCard, updateCard, endGame } from '../../actions/gameActions';
 
 const checkAnswer = (activeCard, destination, droppableDestination ) => {
   if( droppableDestination.index == 0 ) {
@@ -34,6 +34,7 @@ class GameBoard extends Component {
   };
 
   move = (question, timelineCards, droppableSource, droppableDestination) => {
+    this.props.registerUserMove(this.props.game.moves)
     const questionCard = Array.from(question);
     const answeredCards = Array.from(timelineCards);
   
@@ -51,7 +52,7 @@ class GameBoard extends Component {
       if(answeredCards.length == this.props.game.timelineLimit) {
         setTimeout(() => {
           console.log('game finished')
-          this.props.endGame();
+          this.props.endGame(this.props.game.moves, this.props.game.timelineLimit);
         }, 1000)
       } else {
         this.props.updateCard(this.props.game.cards);
@@ -110,6 +111,6 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, {moveCard, updateCard, endGame})(
+export default connect(mapStateToProps, {registerUserMove,moveCard, updateCard, endGame})(
   (GameBoard)
 );
