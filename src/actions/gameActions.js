@@ -77,5 +77,5 @@ const generateRandomCard = (cardStack) => {
 }
 
 const calculateUserScore = (moves, timelineLimit) => {
-  return Math.ceil(moves/timelineLimit * 100)
+  return Math.ceil(timelineLimit/moves * 100)
 }
