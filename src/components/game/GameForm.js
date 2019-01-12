@@ -1,43 +1,59 @@
 import React from 'react'
-import { Input, Button, Form } from 'semantic-ui-react'
+import { Input, Button, Form, Dropdown } from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css'
 import { connect } from 'react-redux';
 import {createTimeline } from '../../actions/gameActions';
+import historyDates from '../common/historyDates'
 
-import { isValidDate } from '../../validation/is-valid-date'
-
-const GameForm = (props) => {  
-  const submitDates = (event) => {
-    let startDate = event.target.startDate.value;
-    let endDate = event.target.endDate.value;    
-
-    if(isValidDate(startDate) && isValidDate(endDate)) {
-      let start = startDate.split('-').join('')
-      let end = endDate.split('-').join('')
-      props.createTimeline(start, end)
-    } else  {
-      console.log('handle errors yo')
+class GameForm extends React.Component {  
+  constructor(props) {
+    super(props)
+    this.state = {
+      startDate: [],
+      endDate: []
     }
   }
 
-  return (
-    <div className="modal-wrapper">
-      <div className="modal-container">
-        <Form onSubmit={submitDates} className="timeline-form">
-          <Form.Group inline>
-            <Form.Field>
-              <label color='white'>Start Date</label>
-              <Input placeholder='YYYY-MM-DD' name="startDate"/>
-            </Form.Field>
-            <Form.Field>
-              <label color='white'>End Date</label>
-              <Input placeholder='YYYY-MM-DD' name="endDate"/>
-            </Form.Field>
+  handleChange = (event) => {
+    console.log(event.currentTarget.textContent)
+    let selectedTime = ''
+    if(event.currentTarget.textContent) {
+      selectedTime = historyDates.find(date => date.text == event.currentTarget.textContent)
+      let timeInterval = selectedTime.value.split("-")
+      this.setState({
+        startDate: [...this.state.startDate, timeInterval[0]],
+        endDate: [...this.state.endDate, timeInterval[1]]
+      }, () => console.log(this.state))
+    } 
+  }
+
+  sortTimeline = (time) => {
+    return this.state[time].sort((a, b) => {
+      return a - b
+    })
+  }
+
+  handleSubmit = () => {
+    let sortedStart = this.sortTimeline('startDate')
+    let sortedEnd = this.sortTimeline('endDate')
+    let start = sortedStart[0]
+    let end = sortedEnd[this.state.endDate.length - 1]
+    console.log(start, end )
+    this.props.createTimeline(start, end)
+  }
+
+  render() {
+    return (
+      <div className="modal-wrapper">
+        <div className="modal-container">
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Select fluid multiple label='Choose Time pediod...' options={historyDates} onChange={this.handleChange}placeholder='Choose time period...'/>
             <Button type='submit'>Submit</Button>
-          </Form.Group>
-        </Form>
+          </Form>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 const mapStateToProps = state => ({
@@ -45,3 +61,4 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {createTimeline})((GameForm));
+

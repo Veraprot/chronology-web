@@ -7,7 +7,6 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   userSelect: 'none',
 
   // change background colour if dragging
-  background: isDragging ? 'lightgreen' : '',
   ...draggableStyle
 });
 
