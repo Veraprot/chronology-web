@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Button, Form, Dropdown } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import { connect } from 'react-redux';
 import {createTimeline } from '../../actions/gameActions';
@@ -22,7 +22,7 @@ class GameForm extends React.Component {
     console.log(event.currentTarget.textContent)
     let selectedTime = ''
     if(event.currentTarget.textContent) {
-      selectedTime = historyDates.find(date => date.text == event.currentTarget.textContent)
+      selectedTime = historyDates.find(date => date.text === event.currentTarget.textContent)
       let timeInterval = selectedTime.value.split("-")
       this.setState({
         startDate: [...this.state.startDate, timeInterval[0]],

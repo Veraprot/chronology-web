@@ -5,10 +5,6 @@ import GameBoard from './GameBoard'
 import GameOver from './GameOver'
 
 class GameIndex extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <>

@@ -6,11 +6,11 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import {registerUserMove, moveCard, updateCard, endGame } from '../../actions/gameActions';
 
 const checkAnswer = (activeCard, destination, droppableDestination ) => {
-  if( droppableDestination.index == 0 ) {
+  if( droppableDestination.index === 0 ) {
     let dateAfter = destination[droppableDestination.index].date
     return activeCard.date < dateAfter
   } else 
-    if(droppableDestination.index == destination.length) {
+    if(droppableDestination.index === destination.length) {
     let cardBefore = destination[droppableDestination.index - 1].date
     return activeCard.date > cardBefore
   } else {
@@ -49,7 +49,7 @@ class GameBoard extends Component {
       console.log(answeredCards)
       this.props.moveCard(answeredCards)
 
-      if(answeredCards.length == this.props.game.timelineLimit) {
+      if(answeredCards.length === this.props.game.timelineLimit) {
         setTimeout(() => {
           console.log('game finished')
           this.props.endGame(this.props.game.moves, this.props.game.timelineLimit);
