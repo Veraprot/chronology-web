@@ -2,7 +2,8 @@ import axios from 'axios';
 
 import {
   GET_PROFILE,
-  CREATE_PROFILE
+  CREATE_PROFILE,
+  CLEAR_CURRENT_PROFILE
 } from './types';
 
 
@@ -29,11 +30,18 @@ export const createProfile = (username, history) => dispatch => {
     .then(res => {
       dispatch({
         type: CREATE_PROFILE,
-        payload: username
+        payload: res.data
       })
       history.push('/game')
     })
     .catch(err => {
       console.log(err)
     });
+};
+
+// Clear profile
+export const clearCurrentProfile = () => {
+  return {
+    type: CLEAR_CURRENT_PROFILE
+  };
 };

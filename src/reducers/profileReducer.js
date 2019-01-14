@@ -1,12 +1,11 @@
 import {
   GET_PROFILE,
   CREATE_PROFILE,
-  GET_ERRORS
+  CLEAR_CURRENT_PROFILE
 } from '../actions/types';
 
 const initialState = {
-  username: null,
-  profiles: null,
+  profile: null,
 };
 
 export default function(state = initialState, action) {
@@ -18,8 +17,13 @@ export default function(state = initialState, action) {
     case CREATE_PROFILE:
       return {
         ...state,
-        username: action.payload
+        profile: action.payload
       }
+    case CLEAR_CURRENT_PROFILE:
+      return {
+        ...state,
+        profile: null
+      };
     default:
       return state;
   }

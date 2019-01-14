@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
-import { setCurrentUser } from './actions/authActions';
+import { setCurrentUser, logoutUser } from './actions/authActions';
+import { clearCurrentProfile } from './actions/profileActions';
 import PrivateRoute from './components/common/PrivateRoute';
 import GameIndex from './components/game/GameIndex';
 import Profile from './components/profile/Profile';
@@ -30,16 +31,17 @@ if (localStorage.jwtToken) {
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {    
     // Logout user
-    // store.dispatch(logoutUser());
+    store.dispatch(logoutUser());
     // Clear current Profile
-    // store.dispatch(clearCurrentProfile());
+    store.dispatch(clearCurrentProfile());
     // Redirect to login
-    // window.location.href = '/login';
+    window.location.href = '/login';
   }
 }
 
 class App extends Component {
   render() {
+    console.log(store.getState())
     return (
       <Provider store={store}>
         <Router>

@@ -6,4 +6,5 @@ export const UPDATE_ACTIVE_CARD = 'UPDATE_ACTIVE_CARD';
 export const ANSWER_CARD = 'ANSWER_CARD';
 export const REGISTER_MOVE = 'REGISTER_MOVE';
 export const END_GAME = 'END_GAME';
+export const CLEAR_CURRENT_PROFILE = 'CLEAR_CURRENT_PROFILE';
 export const GET_ERRORS = 'GET_ERRORS';
