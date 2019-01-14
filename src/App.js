@@ -41,7 +41,6 @@ if (localStorage.jwtToken) {
 
 class App extends Component {
   render() {
-    console.log(store.getState())
     return (
       <Provider store={store}>
         <BrowserRouter>

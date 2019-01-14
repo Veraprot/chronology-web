@@ -39,8 +39,6 @@ export default function(state = initialState, action) {
         moves: action.payload.moves
       };
       case END_GAME:
-      console.log(state)
-      console.log(action.payload.score)
       return {
         ...state,
         gameStatus: action.payload.gameStatus,

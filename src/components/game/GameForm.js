@@ -14,12 +14,7 @@ class GameForm extends React.Component {
     }
   }
 
-  exitModal = () => {
-    window.location.href = '/'
-  }
-
   handleChange = (event) => {
-    console.log(event.currentTarget.textContent)
     let selectedTime = ''
     if(event.currentTarget.textContent) {
       selectedTime = historyDates.find(date => date.text === event.currentTarget.textContent)
@@ -27,7 +22,7 @@ class GameForm extends React.Component {
       this.setState({
         startDate: [...this.state.startDate, timeInterval[0]],
         endDate: [...this.state.endDate, timeInterval[1]]
-      }, () => console.log(this.state))
+      })
     } 
   }
 
@@ -42,13 +37,12 @@ class GameForm extends React.Component {
     let sortedEnd = this.sortTimeline('endDate')
     let start = sortedStart[0]
     let end = sortedEnd[this.state.endDate.length - 1]
-    console.log(start, end )
     this.props.createTimeline(start, end)
   }
 
   render() {
     return (
-      <div className="modal-wrapper" onClick={this.exitModal}>
+      <div className="modal-wrapper">
         <div className="modal-container">
           <Form onSubmit={this.handleSubmit}>
             <Form.Select fluid multiple label='Choose Time pediod...' options={historyDates} onChange={this.handleChange}placeholder='Choose time period...'/>

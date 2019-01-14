@@ -46,12 +46,10 @@ class GameBoard extends Component {
         answered: false
       })
       answeredCards.splice(droppableDestination.index, 0, activeCard);     
-      console.log(answeredCards)
       this.props.moveCard(answeredCards)
 
       if(answeredCards.length === this.props.game.timelineLimit) {
         setTimeout(() => {
-          console.log('game finished')
           this.props.endGame(this.props.game.moves, this.props.game.timelineLimit);
         }, 1000)
       } else {
@@ -70,7 +68,6 @@ class GameBoard extends Component {
 
       //weird but works for card animation
       setTimeout(() => {
-        console.log('this runs')
         this.props.updateCard(this.props.game.cards);
       }, 2360);
     }
