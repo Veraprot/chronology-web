@@ -16,7 +16,7 @@ import './assets/styles/App.scss';
 // Import routing components
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/layouts/NavBar'
-import Home from './components/layouts/Home'
+import Login from './components/layouts/Login'
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -48,7 +48,7 @@ class App extends Component {
           <div className="App">
             <NavBar/>
             <div className="main">
-              <Route exact path='/' component={Home}/>
+              <Route exact path='/login' component={Login}/>
               <Route exact path="/game" component={GameIndex} />
               <Switch>
                 <PrivateRoute exact path="/profile" component={Profile} />
