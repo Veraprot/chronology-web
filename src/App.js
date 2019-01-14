@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
@@ -44,7 +44,7 @@ class App extends Component {
     console.log(store.getState())
     return (
       <Provider store={store}>
-        <Router>
+        <BrowserRouter>
           <div className="App">
             <NavBar/>
             <div className="main">
@@ -55,7 +55,7 @@ class App extends Component {
               </Switch>
             </div>
           </div>
-        </Router>
+        </BrowserRouter>
       </Provider>
     );
   }

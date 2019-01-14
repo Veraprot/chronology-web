@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authActions';
 import TextFieldGroup from '../common/TextFieldGroup';
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
   constructor() {
@@ -12,6 +13,12 @@ class Login extends Component {
       password: '',
       errors: {}
     };
+  }
+
+  componentDidMount = () => {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/profile')
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -87,5 +94,6 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
+Login = withRouter(Login)
 export default connect(mapStateToProps, {loginUser})(Login);
 
