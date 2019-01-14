@@ -19,7 +19,7 @@ for(let i = 1; i <= 20; i++ ) {
   historyDates.push({
     key: `century-${i}`,
     text: `${ordinal_suffix_of(i)} Century`, 
-    value: `${i*100 - 99}0000-${i*100}1231`
+    value: `${i*100 - 99}-01-01/${i*100}-12-31`
   });
 }
 
@@ -28,7 +28,7 @@ let today = new Date();
 historyDates.push({
   key: `century-21`,
   text: `21st Century`, 
-  value: `${2000}-${today.getFullYear()}`
+  value: `${2000}-00-00/${today.getFullYear()}`
 });
 
 export default historyDates
