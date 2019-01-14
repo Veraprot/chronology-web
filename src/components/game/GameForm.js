@@ -14,6 +14,10 @@ class GameForm extends React.Component {
     }
   }
 
+  exitModal = () => {
+    window.location.href = '/'
+  }
+
   handleChange = (event) => {
     console.log(event.currentTarget.textContent)
     let selectedTime = ''
@@ -44,7 +48,7 @@ class GameForm extends React.Component {
 
   render() {
     return (
-      <div className="modal-wrapper">
+      <div className="modal-wrapper" onClick={this.exitModal}>
         <div className="modal-container">
           <Form onSubmit={this.handleSubmit}>
             <Form.Select fluid multiple label='Choose Time pediod...' options={historyDates} onChange={this.handleChange}placeholder='Choose time period...'/>
