@@ -5,7 +5,6 @@ const baseUrl = 'http://localhost:3001/api/v1'
 
 export const createTimeline = (startDate, endDate) => dispatch => {
   let body = JSON.stringify({ game: {startDate, endDate}})
-  console.log(body)
   axios
     .post(
       `${baseUrl}/games/timeline`, 
