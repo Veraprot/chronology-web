@@ -16,7 +16,9 @@ import './assets/styles/App.scss';
 // Import routing components
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/layouts/NavBar'
-import Login from './components/layouts/Login'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
+
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -47,6 +49,7 @@ class App extends Component {
           <div className="App">
             <NavBar/>
             <div className="main">
+              <Route exact path="/register" component={Register} />
               <Route exact path='/login' component={Login}/>
               <Route exact path="/game" component={GameIndex} />
               <Switch>
