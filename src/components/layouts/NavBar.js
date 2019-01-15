@@ -13,13 +13,17 @@ class NavBar extends React.Component {
 
   authLinks = () => {
     return (
-      <a
-        href=""
-        onClick={this.onLogoutClick}
-        className="nav-link"
-      >
-        Logout
-      </a>
+      <>
+        <Link to={`/game`} className="nav-link">Game</Link>
+        <Link to={`/stats`} className="nav-link">User Statistics</Link>
+        <a
+          href=""
+          onClick={this.onLogoutClick}
+          className="nav-link"
+        >
+          Logout
+        </a>
+      </>
     )
   };
 
@@ -40,8 +44,6 @@ class NavBar extends React.Component {
     const { isAuthenticated, user } = this.props.auth;
     return (
       <div className={this.props.game.gameView ? "navbar game-mode" : "navbar"}>
-        <Link to={`/game`} className="nav-link">Game</Link>
-        <Link to={`/stats`} className="nav-link">User Statistics</Link>
         <Link to={`/`} className="nav-link">Home</Link>
         {isAuthenticated ? this.authLinks() : this.guestLinks()}
       </div>
