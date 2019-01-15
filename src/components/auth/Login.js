@@ -15,15 +15,9 @@ class Login extends Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/profile')
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+      this.props.history.push('/profile');
     }
   }
 
@@ -36,6 +30,9 @@ class Login extends Component {
     };
 
     this.props.loginUser(userData);
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/profile');
+    }
   }
 
   onChange = e => {
