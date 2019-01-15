@@ -4,16 +4,12 @@ import {CREATE_TIMELINE, REGISTER_MOVE, UPDATE_ACTIVE_CARD, ANSWER_CARD, END_GAM
 const baseUrl = 'http://localhost:3001/api/v1'
 
 export const createTimeline = (startDate, endDate) => dispatch => {
-  let body = JSON.stringify({ game: {startDate, endDate}})
+  // let body1 = JSON.stringify({ game: {startDate, endDate}})
+  let body = JSON.stringify({ game: {start_date: startDate, end_date: endDate}})
+  console.log(axios.defaults)
+  // , { headers: {'Content-Type': 'application/json'} }
   axios
-    .post(
-      `${baseUrl}/games/timeline`, 
-      body,
-      {
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
+    .post(`${baseUrl}/games/timeline`, body)
     .then(res => {
       dispatch({
         type: CREATE_TIMELINE,

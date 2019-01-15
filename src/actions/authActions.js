@@ -5,32 +5,8 @@ import jwt_decode from 'jwt-decode';
 
 const baseUrl = 'http://localhost:3001/api/v1'
 
-// Register User
-// export const registerUser = (userData, history) => dispatch => {
-//   let body = JSON.stringify({user: userData})
-//   console.log(body)
-//   axios
-//     .post(
-//       `${baseUrl}/users`, 
-//       body,
-//       {
-//         headers: {
-//           'Content-Type': 'application/json',
-//         }
-//       }
-//     )
-//     .then(res => history.push('/login'))
-//     .catch(err =>
-//       dispatch({
-//         type: GET_ERRORS,
-//         payload: err.response.data
-//       })
-//     );
-// };
-
 export const loginUser = userData => dispatch => {
   let body = JSON.stringify({user: userData})
-  console.log('body', body)
   axios
     .post(
       `${baseUrl}/login`, 
@@ -58,7 +34,6 @@ export const loginUser = userData => dispatch => {
 
 export const registerUser = (userData, history) => dispatch => {
   let body = JSON.stringify({user: userData})
-  console.log(axios.defaults)
   axios
     .post(
       `${baseUrl}/users`,
@@ -85,6 +60,7 @@ export const logoutUser = () => dispatch => {
 
 // Set logged in user
 export const setCurrentUser = decoded => {
+  console.log(decoded)
   return {
     type: SET_CURRENT_USER,
     payload: decoded

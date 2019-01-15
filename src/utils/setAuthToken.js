@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 const setAuthToken = token => {
+  axios.defaults.headers.post["Content-Type"] = 'application/json'
+  axios.defaults.headers.patch["Content-Type"] = 'application/json'
+  
   if (token) {
     // Apply to every request
     axios.defaults.headers.common['Authorization'] = token;
