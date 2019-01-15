@@ -41,10 +41,18 @@ class GameForm extends React.Component {
     this.props.createTimeline(start, end)
   }
 
+  hideModule = () => {
+    window.location.href = '/'
+  }
+
+  ignoreExit = event => {
+    event.stopPropagation();
+  }
+
   render() {
     return (
-      <div className="modal-wrapper">
-        <div className="modal-container">
+      <div className="modal-wrapper" onClick={this.hideModule}>
+        <div className="modal-container" onClick={this.ignoreExit}>
           <Form onSubmit={this.handleSubmit}>
             <Form.Select fluid multiple label='Choose Time pediod...' options={historyDates} onChange={this.handleChange}placeholder='Choose time period...'/>
             <Button type='submit'>Submit</Button>

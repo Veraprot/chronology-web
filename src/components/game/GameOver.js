@@ -2,10 +2,19 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 class GameOver extends React.Component {
+
+  hideModule = () => {
+    window.location.href = '/'
+  }
+
+  ignoreExit = event => {
+    event.stopPropagation();
+  }
+
   render() {
     return (
-      <div className="modal-wrapper">
-        <div className="modal-container">
+      <div className="modal-wrapper" onClick={this.hideModule}>
+        <div className="modal-container" onClick={this.ignoreExit}>
           <div>Game over</div>
           <div className="end-game-container">
             <h3>Number of moves: {this.props.game.moves}</h3>
