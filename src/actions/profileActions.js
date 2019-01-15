@@ -9,14 +9,7 @@ import {
 
 const baseUrl = 'http://localhost:3001/api/v1'
 
-export const getProfile = () => {
-  return {
-    type: GET_PROFILE,
-    payload: {}
-  }
-}
-
-export const createProfile = (username, history) => dispatch => {
+export const getProfile = (username, history) => dispatch => {
   let body = JSON.stringify({user: {username}})
   axios
     .post(
@@ -29,7 +22,7 @@ export const createProfile = (username, history) => dispatch => {
   })
     .then(res => {
       dispatch({
-        type: CREATE_PROFILE,
+        type: GET_PROFILE,
         payload: res.data
       })
       history.push('/game')
