@@ -9,10 +9,10 @@ class Register extends Component {
   constructor() {
     super();
     this.state = {
-      name: '',
+      username: '',
       email: '',
       password: '',
-      password2: '',
+      passwordConfirmation: '',
       errors: {}
     };
   }
@@ -35,12 +35,13 @@ class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
+    if(this.state.password !== this.state.passwordConfirmation) {
+      return
+    }
     const newUser = {
-      name: this.state.name,
+      username: this.state.username,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.password2
     };
 
     this.props.registerUser(newUser, this.props.history);
@@ -55,16 +56,13 @@ class Register extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
-              <p className="lead text-center">
-                Create your DevConnector account
-              </p>
               <form noValidate onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  placeholder="Name"
-                  name="name"
-                  value={this.state.name}
+                  placeholder="username"
+                  name="username"
+                  value={this.state.username}
                   onChange={this.onChange}
-                  error={errors.name}
+                  error={errors.username}
                 />
                 <TextFieldGroup
                   placeholder="Email"
@@ -73,7 +71,6 @@ class Register extends Component {
                   value={this.state.email}
                   onChange={this.onChange}
                   error={errors.email}
-                  info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
                 />
                 <TextFieldGroup
                   placeholder="Password"
@@ -85,11 +82,11 @@ class Register extends Component {
                 />
                 <TextFieldGroup
                   placeholder="Confirm Password"
-                  name="password2"
+                  name="passwordConfirmation"
                   type="password"
-                  value={this.state.password2}
+                  value={this.state.passwordConfirmation}
                   onChange={this.onChange}
-                  error={errors.password2}
+                  error={errors.passwordConfirmation}
                 />
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
@@ -100,12 +97,6 @@ class Register extends Component {
     );
   }
 }
-
-Register.propTypes = {
-  registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => ({
   auth: state.auth,

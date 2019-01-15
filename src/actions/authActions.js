@@ -7,7 +7,8 @@ const baseUrl = 'http://localhost:3001/api/v1'
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
-  let body = JSON.stringify({auth: userData})
+  let body = JSON.stringify({user: userData})
+  console.log(body)
   axios
     .post(
       `${baseUrl}/users`, 
