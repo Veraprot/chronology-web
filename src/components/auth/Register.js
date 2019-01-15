@@ -12,7 +12,7 @@ class Register extends Component {
       username: '',
       email: '',
       password: '',
-      passwordConfirmation: '',
+      password_confirmation: '',
       errors: {}
     };
   }
@@ -35,13 +35,11 @@ class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    if(this.state.password !== this.state.passwordConfirmation) {
-      return
-    }
     const newUser = {
       username: this.state.username,
       email: this.state.email,
       password: this.state.password,
+      password_confirmation: this.state.password_confirmation
     };
 
     this.props.registerUser(newUser, this.props.history);
@@ -82,11 +80,11 @@ class Register extends Component {
                 />
                 <TextFieldGroup
                   placeholder="Confirm Password"
-                  name="passwordConfirmation"
+                  name="password_confirmation"
                   type="password"
-                  value={this.state.passwordConfirmation}
+                  value={this.state.password_confirmation}
                   onChange={this.onChange}
-                  error={errors.passwordConfirmation}
+                  error={errors.password_confirmation}
                 />
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>

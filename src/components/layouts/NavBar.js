@@ -38,7 +38,6 @@ class NavBar extends React.Component {
   
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    console.log(this.authLinks())
     return (
       <div className={this.props.game.gameView ? "navbar game-mode" : "navbar"}>
         <Link to={`/game`} className="nav-link">Game</Link>

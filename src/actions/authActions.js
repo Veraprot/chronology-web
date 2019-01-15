@@ -6,33 +6,34 @@ import jwt_decode from 'jwt-decode';
 const baseUrl = 'http://localhost:3001/api/v1'
 
 // Register User
-export const registerUser = (userData, history) => dispatch => {
-  let body = JSON.stringify({user: userData})
-  console.log(body)
-  axios
-    .post(
-      `${baseUrl}/users`, 
-      body,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-    )
-    .then(res => history.push('/login'))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
+// export const registerUser = (userData, history) => dispatch => {
+//   let body = JSON.stringify({user: userData})
+//   console.log(body)
+//   axios
+//     .post(
+//       `${baseUrl}/users`, 
+//       body,
+//       {
+//         headers: {
+//           'Content-Type': 'application/json',
+//         }
+//       }
+//     )
+//     .then(res => history.push('/login'))
+//     .catch(err =>
+//       dispatch({
+//         type: GET_ERRORS,
+//         payload: err.response.data
+//       })
+//     );
+// };
 
 export const loginUser = userData => dispatch => {
-  let body = JSON.stringify({auth: userData})
+  let body = JSON.stringify({user: userData})
+  console.log('body', body)
   axios
     .post(
-      `${baseUrl}/user_token`, 
+      `${baseUrl}/login`, 
       body,
       {
         headers: {
@@ -55,6 +56,25 @@ export const loginUser = userData => dispatch => {
     );
 };
 
+export const registerUser = (userData, history) => dispatch => {
+  let body = JSON.stringify({user: userData})
+  console.log(axios.defaults)
+  axios
+    .post(
+      `${baseUrl}/users`,
+        body,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        }
+    )
+    .then(res => {
+      console.log(res)
+      history.push('/login')
+    })
+}
+
 export const logoutUser = () => dispatch => {
   // Remove token from localStorage
   localStorage.removeItem('jwtToken');
@@ -70,3 +90,23 @@ export const setCurrentUser = decoded => {
     payload: decoded
   };
 };
+
+// // get info of logged in user 
+// export const findCurrentUser = () => {
+//   return (dispatch) => {
+//     return fetch(BACKEND, {
+//       method: "POST",
+//       headers: {
+//         Authorization: `Bearer ${localStorage.token}`
+//       }
+//     })
+//       .then(res => res.json())
+//       .then(json => {
+//         dispatch({
+//           type: FIND_CURRENT_USER,
+//           payload: json
+//         })
+//       })
+
+//   }
+// }

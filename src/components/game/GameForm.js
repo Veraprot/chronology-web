@@ -4,7 +4,6 @@ import 'semantic-ui-css/semantic.min.css'
 import { connect } from 'react-redux';
 import {createTimeline } from '../../actions/gameActions';
 import historyDates from '../common/historyDates'
-console.log(historyDates)
 class GameForm extends React.Component {  
   constructor(props) {
     super(props)
@@ -37,7 +36,6 @@ class GameForm extends React.Component {
     let sortedEnd = this.sortTimeline('endDate')
     let start = sortedStart[0]
     let end = sortedEnd[this.state.endDate.length - 1]
-    console.log(start, end)
     this.props.createTimeline(start, end)
   }
 
