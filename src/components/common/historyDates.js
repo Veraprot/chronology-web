@@ -23,6 +23,4 @@ for(let i = 1; i <= 20; i++ ) {
   });
 }
 
-let today = new Date();
-
 export default historyDates
