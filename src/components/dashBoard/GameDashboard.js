@@ -46,6 +46,7 @@ class GameDashoard extends Component {
     let games = [...this.props.multiPlayerGames.games, game]
     console.log(games)
     this.props.updateGames(games)
+    this.props.addParticipant(game.id)
   };
 
   //this needs to be fixed

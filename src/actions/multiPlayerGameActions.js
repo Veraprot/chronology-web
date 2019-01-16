@@ -37,8 +37,8 @@ export const updateGames = (games) => dispatch => {
   })
 }
 
-export const addParticipant = (activeGame) => dispatch =>{
-  let body = JSON.stringify({participant: {num_of_answers: 0, num_of_moves: 0, game_id: activeGame}})
+export const addParticipant = (game_id) => dispatch =>{
+  let body = JSON.stringify({participant: {num_of_answers: 0, num_of_moves: 0, game_id: game_id}})
   axios
     .post(`${API_ROOT}/participants`, body)
     .then(res => {
