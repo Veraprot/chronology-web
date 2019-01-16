@@ -14,15 +14,15 @@ const findActiveGame = (games, activeGame) => {
   );
 };
 
-// const mapGames = (games, handleClick) => {
-//   return games.map(game => {
-//     return (
-//       <li key={game.id} onClick={() => handleClick(game.id)}>
-//         {game.start_date}
-//       </li>
-//     );
-//   });
-// };
+const mapGames = (games, handleClick) => {
+  return games.map(game => {
+    return (
+      <li key={game.id} onClick={() => handleClick(game.id)}>
+        {game.start_date}
+      </li>
+    );
+  });
+};
 
 class GameDashoard extends Component {
   state = {
@@ -78,7 +78,7 @@ class GameDashoard extends Component {
           />
         ) : null}
         <h2>Games</h2>
-        {/* <ul>{mapGames(games, this.handleClick)}</ul> */}
+        <ul>{mapGames(games, this.handleClick)}</ul>
         {this.state.newGame &&
           <NewGameForm/>
         }

@@ -39,6 +39,7 @@ class NewGameForm extends React.Component {
     let end = sortedEnd[this.state.endDate.length - 1]
     console.log(start, end)
     this.props.createNewGame(start, end)
+    this.hideModule()
   }
 
   hideModule = () => {
