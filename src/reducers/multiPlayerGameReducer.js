@@ -1,7 +1,6 @@
 import {
   GET_GAMES, 
-  SET_ACTIVE_GAME,
-  UPDATE_GAMES
+  SET_ACTIVE_GAME
 } from '../actions/types';
 
 const initialState = {
