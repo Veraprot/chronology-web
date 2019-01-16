@@ -25,10 +25,4 @@ for(let i = 1; i <= 20; i++ ) {
 
 let today = new Date();
 
-// historyDates.push({
-//   key: `century-21`,
-//   text: `21st Century`, 
-//   value: `${2000}-01-01/${today.getFullYear()}`
-// });
-
 export default historyDates
