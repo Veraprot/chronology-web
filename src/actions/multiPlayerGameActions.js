@@ -3,7 +3,6 @@ import { API_ROOT } from '../constants';
 import {GET_GAMES, SET_ACTIVE_GAME} from './types';
 
 export const getGames = () => dispatch => {
-  console.log('here')
   axios
     .get(`${API_ROOT}/games`)
     .then(res => {

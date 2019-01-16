@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActionCable } from 'react-actioncable-provider';
 
-const Cable = ({games, handleActiveParticipant }) => {
+const Cable = ({games, handleReceivedParticipant }) => {
   return (
     <>
       {games.map(game => {
@@ -9,7 +9,7 @@ const Cable = ({games, handleActiveParticipant }) => {
           <ActionCable
             key={game.id}  
             channel={{ channel: 'ParticipantsChannel', game: game.id }}
-            onReceived={handleActiveParticipant}
+            onReceived={handleReceivedParticipant}
           />
         );
       })}

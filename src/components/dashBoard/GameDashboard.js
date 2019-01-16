@@ -41,7 +41,6 @@ class GameDashoard extends Component {
   };
 
   handleReceivedGame = response => {
-    console.log('or here', response)
     const { game } = response;
     let games = [...this.props.multiPlayerGames.games, game]
     console.log(games)
@@ -80,7 +79,7 @@ class GameDashoard extends Component {
         {this.props.multiPlayerGames.games.length ? (
           <Cable
             games={games}
-            handleActiveParticipant={this.handleActiveParticipant}
+            handleReceivedParticipant={this.handleReceivedParticipant}
           />
         ) : null}
         <h2>Games</h2>
