@@ -6,7 +6,7 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 import { clearCurrentProfile } from './actions/profileActions';
 import PrivateRoute from './components/common/PrivateRoute';
 import GameIndex from './components/game/GameIndex';
-import GameDashboard from './components/multiPlayer/GameDashboard';
+import GameDashboard from './components/dashBoard/GameDashboard';
 import Profile from './components/profile/Profile';
 
 
@@ -19,6 +19,7 @@ import './assets/styles/App.scss';
 import NavBar from './components/layouts/NavBar'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
+import GameMultiBoard from './components/multiPlayer/GameMultiBoard';
 
 
 // Check for token
@@ -54,6 +55,7 @@ class App extends Component {
               <Route exact path='/login' component={Login}/>
               <Route exact path="/game" component={GameIndex} />
               <Route exact path="/dashboard" component={GameDashboard} />
+              <Route exact path="/chronology" component={GameMultiBoard} />
               <Switch>
                 <PrivateRoute exact path="/profile" component={Profile} />
               </Switch>
