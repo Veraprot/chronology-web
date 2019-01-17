@@ -19,7 +19,7 @@ class GameBoard extends Component {
 }
 
 const mapStateToProps = state => ({
-  game: state.game
+  multiPlayerGame: state.multiPlayerGames
 });
 
 

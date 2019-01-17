@@ -3,7 +3,7 @@ import { Button, Form } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import { connect } from 'react-redux';
 import {createTimeline } from '../../actions/gameActions';
-import {createNewGame } from '../../actions/multiPlayerGameActions';
+import {createNewGame } from '../../actions/multiPlayerGamesActions';
 import historyDates from '../common/historyDates'
 class NewGameForm extends React.Component {  
   constructor(props) {

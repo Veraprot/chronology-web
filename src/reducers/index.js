@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import profileReducer from './profileReducer';
 import gameReducer from './gameReducer';
-import multiPlayerGameReducer from './multiPlayerGameReducer';
+import multiPlayerGamesReducer from './multiPlayerGamesReducer';
 
 export default combineReducers({
   auth: authReducer,
   profile: profileReducer,
-  multiPlayerGames: multiPlayerGameReducer, 
+  multiPlayerGames: multiPlayerGamesReducer, 
   game: gameReducer
 })

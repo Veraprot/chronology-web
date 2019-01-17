@@ -4,7 +4,7 @@ import { Button, Form } from 'semantic-ui-react'
 import { withRouter } from "react-router-dom";
 
 import {connect} from 'react-redux'
-import {getGames, setActiveGame, updateGames, addParticipant } from '../../actions/multiPlayerGameActions';
+import {getGames, setActiveGame, updateGames, addParticipant } from '../../actions/multiPlayerGamesActions';
 
 import Cable from './Cable';
 import NewGameForm from './NewGameForm';
