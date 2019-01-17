@@ -37,27 +37,30 @@ class GameDashoard extends Component {
   handleClick = game_id => {
     this.props.setActiveGame(game_id)
     this.props.addParticipant(game_id)
-    // this.props.history.push(`/chronology`)
+    this.props.history.push(`/chronology`)
   };
 
   handleReceivedGame = response => {
     const { game } = response;
     let games = [...this.props.multiPlayerGames.games, game]
+    console.log('received game')
     console.log(games)
     this.props.updateGames(games)
-    this.props.addParticipant(game.id)
+    // this.props.addParticipant(game.id)
   };
 
   //this needs to be fixed
   handleReceivedParticipant = response => {
-    console.log('here')
+    console.log('-------------')
+    console.log(response)
     const { participant } = response;
     const games = [...this.props.multiPlayerGames.games];
+    console.log(games)
+    console.log(this.props)
     const game = games.find(
       game => game.id === participant.game_id
     );
     game.participants = [...game.participants, participant];
-    console.log(games)
     //splice games insert new gamew updated participant
     // this.props.updateGames(games)
   };
@@ -86,9 +89,9 @@ class GameDashoard extends Component {
         <div className="active-games-container">
           {mapGames(games, this.handleClick)}
         </div>
-        {this.state.newGame &&
+        <div className={this.state.newGame? 'modal-wrapper' : 'modal-wrapper disabled'}  onClick={this.toggleNewGame}>
           <NewGameForm/>
-        }
+        </div>
         <Button type='submit' onClick={this.toggleNewGame}>Start New Game</Button>
         {activeGame ? (
           <MessagesArea

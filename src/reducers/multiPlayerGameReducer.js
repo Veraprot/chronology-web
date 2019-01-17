@@ -5,7 +5,8 @@ import {
 
 const initialState = {
   games: [],
-  activeGame: null
+  activeGame: null,
+  gameHost: null
 };
 
 export default function(state = initialState, action) {

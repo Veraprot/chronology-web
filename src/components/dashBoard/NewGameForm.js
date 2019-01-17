@@ -42,30 +42,25 @@ class NewGameForm extends React.Component {
     this.hideModule()
   }
 
-  hideModule = () => {
-    window.location.href = '/dashboard'
-  }
-
   ignoreExit = event => {
     event.stopPropagation();
   }
 
   render() {
     return (
-      <div className="modal-wrapper" onClick={this.hideModule}>
-        <div className="modal-container" onClick={this.ignoreExit}>
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Select fluid multiple label='Choose Time pediod...' options={historyDates} onChange={this.handleChange}placeholder='Choose time period...'/>
-            <Button type='submit'>Submit</Button>
-          </Form>
-        </div>
+      <div className="modal-container">
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Select fluid multiple label='Choose Time pediod...' options={historyDates} onChange={this.handleChange}placeholder='Choose time period...'/>
+          <Button type='submit'>Submit</Button>
+        </Form>
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  game: state.game
+  game: state.game,
+  auth: state.auth
 })
 
 export default connect(mapStateToProps, {createTimeline, createNewGame})((NewGameForm));
