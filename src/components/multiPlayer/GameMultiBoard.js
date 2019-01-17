@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
-class GameBoard extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      answered: false //rename this later 
-    }
-  }
-
+class GameMultiBoard extends Component {
   render() {
     return (
       <div className="board-container">
@@ -24,5 +17,5 @@ const mapStateToProps = state => ({
 
 
 export default connect(mapStateToProps, {})(
-  (GameBoard)
+  (GameMultiBoard)
 );

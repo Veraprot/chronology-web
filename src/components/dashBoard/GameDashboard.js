@@ -8,12 +8,6 @@ import {getGames, setActiveGame, updateGames, addParticipant } from '../../actio
 
 import Cable from './Cable';
 import NewGameForm from './NewGameForm';
-import MessagesArea from './MessagesArea';
-const findActiveGame = (games, activeGame) => {
-  return games.find(
-    game => game.id === activeGame
-  );
-};
 
 const mapGames = (games, handleClick) => {
   return games.map(game => {
@@ -92,14 +86,6 @@ class GameDashoard extends Component {
           <NewGameForm/>
         </div>
         <Button type='submit' onClick={this.toggleNewGame}>Start New Game</Button>
-        {activeGame ? (
-          <MessagesArea
-            game={findActiveGame(
-              games,
-              activeGame
-            )}
-          />
-        ) : null}
       </>
     );
   }
