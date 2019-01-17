@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_ROOT } from '../constants';
-import {GET_GAMES, SET_ACTIVE_GAME, SET_GAME_CREATOR} from './types';
+import {GET_GAMES, SET_GAME_CREATOR} from './types';
 
 export const getGames = () => dispatch => {
   axios
@@ -18,15 +18,6 @@ export const getGames = () => dispatch => {
     });
 }
 
-export const setActiveGame = (id) => dispatch => {
-  dispatch({
-    type: SET_ACTIVE_GAME,
-    payload: {
-      activeGame: id
-    }
-  })
-}
-
 export const updateGames = (games) => dispatch => {
   dispatch({
     type: GET_GAMES,
@@ -41,27 +32,35 @@ export const addParticipant = (game_id) => dispatch =>{
   axios
     .post(`${API_ROOT}/participants`, body)
     .then(res => {
-      console.log(res)
+      dispatch({
+        type: SET_GAME_CREATOR,
+        payload: {
+          gameCreator: ''
+        }
+      })
     })
     .catch(err => {
       console.log(err)
     })
 }
 
-export const createNewGame = (startDate, endDate, user_id) => dispatch => {
-  let body = JSON.stringify({game: {start_date: startDate, end_date: endDate, participant_id: user_id}})
+export const createNewGame = (startDate, endDate) => dispatch => {
+  let body = JSON.stringify({game: {start_date: startDate, end_date: endDate}})
   axios
     .post(`${API_ROOT}/games`, body)
     .then(res => {
       console.log('request done')
-      dispatch({
-        type: SET_GAME_CREATOR,
-        payload: {
-          gameCreator: user_id
-        }
-      })
     })
     .catch(err => {
       console.log(err)
     });
+}
+
+export const setGameCreator = (user_id) => dispatch => {
+  dispatch({
+    type: SET_GAME_CREATOR,
+    payload: {
+      gameCreator: user_id
+    }
+  })
 }

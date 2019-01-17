@@ -3,7 +3,7 @@ import { Button, Form } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import { connect } from 'react-redux';
 import {createTimeline } from '../../actions/gameActions';
-import {createNewGame } from '../../actions/dashboardActions';
+import {createNewGame, setGameCreator } from '../../actions/dashboardActions';
 import historyDates from '../common/historyDates'
 class NewGameForm extends React.Component {  
   constructor(props) {
@@ -38,7 +38,8 @@ class NewGameForm extends React.Component {
     let start = sortedStart[0]
     let end = sortedEnd[this.state.endDate.length - 1]
     console.log(start, end)
-    this.props.createNewGame(start, end, this.props.auth.user.user_id)
+    this.props.setGameCreator(this.props.auth.user.user_id)
+    this.props.createNewGame(start, end)
   }
 
   ignoreExit = event => {
@@ -62,5 +63,5 @@ const mapStateToProps = state => ({
   auth: state.auth
 })
 
-export default connect(mapStateToProps, {createTimeline, createNewGame})((NewGameForm));
+export default connect(mapStateToProps, {createTimeline, setGameCreator, createNewGame})((NewGameForm));
 

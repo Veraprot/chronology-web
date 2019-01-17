@@ -4,7 +4,8 @@ import { Button, Form } from 'semantic-ui-react'
 import { withRouter } from "react-router-dom";
 
 import {connect} from 'react-redux'
-import {getGames, setActiveGame, updateGames, addParticipant } from '../../actions/dashboardActions';
+import {getGames, updateGames, addParticipant } from '../../actions/dashboardActions';
+import {setActiveGame} from '../../actions/multiPlayerGameActions';
 
 import Cable from './Cable';
 import NewGameForm from './NewGameForm';
@@ -46,10 +47,11 @@ class GameDashoard extends Component {
     if(game.participants[0].user_id != this.props.auth.user.user_id &&
       game.participants.length < 2
       ) {
-      this.props.setActiveGame(game.id)
+      this.props.setActiveGame(game)
       this.props.addParticipant(game.id)
+      // this.props.history.push('/chronology')
     } else {
-      this.props.history.push('/chronology')
+      console.log('something went wrong')
     }
   };
 

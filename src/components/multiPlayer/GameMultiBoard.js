@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 class GameMultiBoard extends Component {
   render() {
+    console.log(this.props)
     return (
       <div className="board-container">
         hi
@@ -12,7 +13,7 @@ class GameMultiBoard extends Component {
 }
 
 const mapStateToProps = state => ({
-  dashboard: state.dashboard
+  multiPlayerGame: state.multiPlayerGame
 });
 
 
