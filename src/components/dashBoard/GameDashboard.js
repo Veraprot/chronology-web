@@ -18,7 +18,7 @@ const findActiveGame = (games, activeGame) => {
 const mapGames = (games, handleClick) => {
   return games.map(game => {
     return (
-      <div className="game-card" key={game.id} onClick={() => handleClick(game.id)}>
+      <div className="game-card" key={game.id} onClick={() => handleClick(game)}>
         {game.start_date}
       </div>
     );
@@ -34,35 +34,35 @@ class GameDashoard extends Component {
     this.props.getGames()
   };
 
-  handleClick = game_id => {
-    this.props.setActiveGame(game_id)
-    this.props.addParticipant(game_id)
-    this.props.history.push(`/chronology`)
+  handleClick = game => {
+    if(game.participants[0].user_id != this.props.auth.user.user_id &&
+      game.participants.length < 2
+      ) {
+      this.props.setActiveGame(game.id)
+      this.props.addParticipant(game.id)
+    } else {
+      this.props.history.push('/chronology')
+    }
   };
 
   handleReceivedGame = response => {
     const { game } = response;
     let games = [...this.props.multiPlayerGames.games, game]
-    console.log('received game')
-    console.log(games)
+    console.log(game)
     this.props.updateGames(games)
-    // this.props.addParticipant(game.id)
+    console.log(this.props.auth)
+    if(this.props.auth.user.user_id == this.props.multiPlayerGames.gameCreator) {
+      this.props.addParticipant(game.id)
+    }
   };
 
-  //this needs to be fixed
   handleReceivedParticipant = response => {
-    console.log('-------------')
-    console.log(response)
     const { participant } = response;
     const games = [...this.props.multiPlayerGames.games];
-    console.log(games)
-    console.log(this.props)
     const game = games.find(
       game => game.id === participant.game_id
     );
     game.participants = [...game.participants, participant];
-    //splice games insert new gamew updated participant
-    // this.props.updateGames(games)
   };
 
   toggleNewGame = (e) => {
@@ -71,7 +71,6 @@ class GameDashoard extends Component {
   }
 
   render = () => {
-    console.log(this.props)
     const { games, activeGame } = this.props.multiPlayerGames;
     return (
       <>
@@ -106,7 +105,8 @@ class GameDashoard extends Component {
   }
 }
 const mapStateToProps = state => ({
-  multiPlayerGames: state.multiPlayerGames
+  multiPlayerGames: state.multiPlayerGames,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, {getGames, setActiveGame, updateGames, addParticipant})(

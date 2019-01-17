@@ -38,8 +38,7 @@ class NewGameForm extends React.Component {
     let start = sortedStart[0]
     let end = sortedEnd[this.state.endDate.length - 1]
     console.log(start, end)
-    this.props.createNewGame(start, end)
-    this.hideModule()
+    this.props.createNewGame(start, end, this.props.auth.user.user_id)
   }
 
   ignoreExit = event => {
@@ -47,8 +46,9 @@ class NewGameForm extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
-      <div className="modal-container">
+      <div className="modal-container" onClick={this.ignoreExit}>
         <Form onSubmit={this.handleSubmit}>
           <Form.Select fluid multiple label='Choose Time pediod...' options={historyDates} onChange={this.handleChange}placeholder='Choose time period...'/>
           <Button type='submit'>Submit</Button>

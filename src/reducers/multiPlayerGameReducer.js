@@ -1,12 +1,13 @@
 import {
   GET_GAMES, 
-  SET_ACTIVE_GAME
+  SET_ACTIVE_GAME,
+  SET_GAME_CREATOR
 } from '../actions/types';
 
 const initialState = {
   games: [],
   activeGame: null,
-  gameHost: null
+  gameCreator: null
 };
 
 export default function(state = initialState, action) {
@@ -20,6 +21,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         activeGame: action.payload.activeGame
+      };
+      case SET_GAME_CREATOR:
+      return {
+        ...state,
+        gameCreator: action.payload.gameCreator
       };
     default:
       return state;

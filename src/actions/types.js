@@ -10,6 +10,8 @@ export const END_GAME = 'END_GAME';
 
 export const GET_GAMES = 'GET_GAMES';
 export const SET_ACTIVE_GAME = 'SET_ACTIVE_GAME';
+export const SET_GAME_CREATOR = 'SET_GAME_CREATOR';
+
 
 export const CLEAR_CURRENT_PROFILE = 'CLEAR_CURRENT_PROFILE';
 export const GET_ERRORS = 'GET_ERRORS';
