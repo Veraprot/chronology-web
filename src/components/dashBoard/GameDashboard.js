@@ -4,7 +4,7 @@ import { Button, Form } from 'semantic-ui-react'
 import { withRouter } from "react-router-dom";
 
 import {connect} from 'react-redux'
-import {getGames, setActiveGame, updateGames, addParticipant } from '../../actions/multiPlayerGamesActions';
+import {getGames, setActiveGame, updateGames, addParticipant } from '../../actions/dashboardActions';
 
 import Cable from './Cable';
 import NewGameForm from './NewGameForm';
@@ -55,18 +55,18 @@ class GameDashoard extends Component {
 
   handleReceivedGame = response => {
     const { game } = response;
-    let games = [...this.props.multiPlayerGames.games, game]
+    let games = [...this.props.dashboard.games, game]
     this.props.updateGames(games)
     console.log(this.props.auth.user.user_id)
-    console.log(this.props.multiPlayerGames.gameCreator)
-    if(this.props.auth.user.user_id == this.props.multiPlayerGames.gameCreator) {
+    console.log(this.props.dashboard.gameCreator)
+    if(this.props.auth.user.user_id == this.props.dashboard.gameCreator) {
       this.props.addParticipant(game.id)
     }
   };
 
   handleReceivedParticipant = response => {
     const { participant } = response;
-    const games = [...this.props.multiPlayerGames.games];
+    const games = [...this.props.dashboard.games];
     const game = games.find(
       game => game.id === participant.game_id
     );
@@ -80,14 +80,14 @@ class GameDashoard extends Component {
 
   render = () => {
     console.log(this.props)
-    const { games, activeGame } = this.props.multiPlayerGames;
+    const { games, activeGame } = this.props.dashboard;
     return (
       <>
         <ActionCable
           channel={{ channel: 'GamesChannel' }}
           onReceived={this.handleReceivedGame}
         />
-        {this.props.multiPlayerGames.games.length ? (
+        {this.props.dashboard.games.length ? (
           <Cable
             games={games}
             handleReceivedParticipant={this.handleReceivedParticipant}
@@ -106,7 +106,7 @@ class GameDashoard extends Component {
   }
 }
 const mapStateToProps = state => ({
-  multiPlayerGames: state.multiPlayerGames,
+  dashboard: state.dashboard,
   auth: state.auth
 });
 

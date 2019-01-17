@@ -12,7 +12,7 @@ class GameMultiBoard extends Component {
 }
 
 const mapStateToProps = state => ({
-  multiPlayerGame: state.multiPlayerGames
+  dashboard: state.dashboard
 });
 
 
