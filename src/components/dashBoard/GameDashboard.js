@@ -9,11 +9,24 @@ import {getGames, setActiveGame, updateGames, addParticipant } from '../../actio
 import Cable from './Cable';
 import NewGameForm from './NewGameForm';
 
+const mapParticipants = (participants) => {
+  return participants.map(participant => {
+    return (
+      <div className="user-profile-container" key={participant.id}>
+        <div className="username">{participant.user.user_name}</div>
+      </div>
+    )
+  })
+}
+
 const mapGames = (games, handleClick) => {
   return games.map(game => {
     return (
       <div className="game-card" key={game.id} onClick={() => handleClick(game)}>
-        {game.start_date}
+        <div className="game-time-range">
+        {game.start_date} - {game.end_date}
+        </div>
+        {mapParticipants(game.participants)}
       </div>
     );
   });
@@ -29,6 +42,7 @@ class GameDashoard extends Component {
   };
 
   handleClick = game => {
+    console.log(game)
     if(game.participants[0].user_id != this.props.auth.user.user_id &&
       game.participants.length < 2
       ) {
@@ -42,9 +56,9 @@ class GameDashoard extends Component {
   handleReceivedGame = response => {
     const { game } = response;
     let games = [...this.props.multiPlayerGames.games, game]
-    console.log(game)
     this.props.updateGames(games)
-    console.log(this.props.auth)
+    console.log(this.props.auth.user.user_id)
+    console.log(this.props.multiPlayerGames.gameCreator)
     if(this.props.auth.user.user_id == this.props.multiPlayerGames.gameCreator) {
       this.props.addParticipant(game.id)
     }
@@ -65,6 +79,7 @@ class GameDashoard extends Component {
   }
 
   render = () => {
+    console.log(this.props)
     const { games, activeGame } = this.props.multiPlayerGames;
     return (
       <>

@@ -53,6 +53,7 @@ export const createNewGame = (startDate, endDate, user_id) => dispatch => {
   axios
     .post(`${API_ROOT}/games`, body)
     .then(res => {
+      console.log('request done')
       dispatch({
         type: SET_GAME_CREATOR,
         payload: {
