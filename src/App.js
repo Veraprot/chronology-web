@@ -6,6 +6,8 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 import { clearCurrentProfile } from './actions/profileActions';
 import PrivateRoute from './components/common/PrivateRoute';
 import GameIndex from './components/game/GameIndex';
+import GameForm from './components/game/GameForm';
+
 import GameDashboard from './components/dashBoard/GameDashboard';
 import Profile from './components/profile/Profile';
 
@@ -53,11 +55,12 @@ class App extends Component {
             <div className="main">
               <Route exact path="/register" component={Register} />
               <Route exact path='/login' component={Login}/>
-              <Route exact path="/game" component={GameIndex} />
               <Route exact path="/chronology" component={GameMultiBoard} />
               <Switch>
+                <PrivateRoute exact path="/game" component={GameIndex} />
                 <PrivateRoute exact path="/dashboard" component={GameDashboard} />
-                <PrivateRoute exact path="/" component={Profile} />
+                <PrivateRoute exact path="/stats" component={Profile} />
+                <PrivateRoute exact path="/" component={(props) => <GameForm {...props} module={false}/>} />
               </Switch>
             </div>
           </div>

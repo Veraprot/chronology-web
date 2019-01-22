@@ -27,13 +27,26 @@ html {
   left: 0;
   z-index: 3;
   background-color: rgba(0, 0, 0, 0.8);
-
+  
   &.disabled {
     display: none;
   }
-  
+
   .modal-container {
     margin: 45vh auto 0 auto;
+  }
+}
+
+.timeline-form-wrapper {
+  margin: calc(45vh - 75px) auto 0 auto;
+  .modal-container {
+    margin: 0 auto;
+  }
+}
+
+.modal-wrapper, 
+.timeline-form-wrapper {  
+  .modal-container {
     padding: 40px 20px;
     width: 60%;
     background-color: white;

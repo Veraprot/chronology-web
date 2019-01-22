@@ -40,6 +40,7 @@ class GameForm extends React.Component {
   }
 
   hideModule = () => {
+    console.log(window.location)
     window.location.href = '/'
   }
 
@@ -47,14 +48,20 @@ class GameForm extends React.Component {
     event.stopPropagation();
   }
 
-  render() {
+  renderForm = () => {
     return (
-      <div className="modal-wrapper" onClick={this.hideModule}>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Select fluid multiple label='Choose Time pediod...' options={historyDates} onChange={this.handleChange}placeholder='Choose time period...'/>
+        <Button type='submit'>Submit</Button>
+      </Form>
+    )
+  }
+  render() {
+    console.log(this.props)
+    return (
+      <div className={this.props.module ? "modal-wrapper" : "timeline-form-wrapper"} onClick={this.hideModule}>
         <div className="modal-container" onClick={this.ignoreExit}>
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Select fluid multiple label='Choose Time pediod...' options={historyDates} onChange={this.handleChange}placeholder='Choose time period...'/>
-            <Button type='submit'>Submit</Button>
-          </Form>
+          {this.renderForm()}
         </div>
       </div>
     )

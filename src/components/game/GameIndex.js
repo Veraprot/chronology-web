@@ -9,7 +9,7 @@ class GameIndex extends React.Component {
     return (
       <>
       { this.props.game.gameStatus === 'inactive' &&
-        <GameForm/>
+        <GameForm module="true"/>
       }
       { this.props.game.gameStatus === 'in progress' &&
         <GameBoard/>
