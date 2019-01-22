@@ -11,8 +11,19 @@ class Profile extends React.Component {
     console.log(this.props.profile.gameStats)
     return this.props.profile.gameStats.map(gameStat => {
       return(
-        <div key={gameStat.id} className="stat-container">
-          <h1>hi</h1>
+        <div key={gameStat.id} className="stats-inner-container">
+          <div className="timeline-container">
+            <span>{gameStat.game.start}</span>
+            <span>{gameStat.game.end}</span>
+          </div>
+          <div className="stats-info">
+            <div>
+              Number of moves:  {gameStat.num_of_moves}
+            </div>
+            <div>
+              Score: {gameStat.score}
+            </div>
+          </div>
         </div>
       )
     })
@@ -21,7 +32,9 @@ class Profile extends React.Component {
     return (
       <>
         <h1>profile</h1>
-        {this.renderStats()}
+        <div className="stats-container">
+          {this.renderStats()}
+        </div>
       </>
     )
   }
