@@ -49,7 +49,8 @@ class GameBoard extends Component {
       this.props.moveCard(answeredCards)
 
       if(answeredCards.length === this.props.game.timelineLimit) {
-        this.props.endGame(this.props.game.moves, this.props.game.timelineLimit);
+        this.props.endGame(this.props.game.moves, this.props.game.timelineLimit, this.props.game.activeGame,
+        this.props.game.timelineLimit);
       } else {
         this.props.updateCard(this.props.game.cards);
       }
@@ -90,6 +91,7 @@ class GameBoard extends Component {
   };
 
   render() {
+    console.log(this.props)
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div className="board-container">
@@ -102,6 +104,7 @@ class GameBoard extends Component {
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   game: state.game
 });
 

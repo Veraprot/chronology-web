@@ -5,9 +5,8 @@ import {CREATE_TIMELINE, REGISTER_MOVE, UPDATE_ACTIVE_CARD, ANSWER_CARD, END_GAM
 
 export const createTimeline = (startDate, endDate) => dispatch => {
   let body = JSON.stringify({ game: {start_date: startDate, end_date: endDate}})
-  console.log(body)
   axios
-    .post(`${API_ROOT}/games/timeline`, body)
+    .post(`${API_ROOT}/games`, body)
     .then(res => {
       dispatch({
         type: CREATE_TIMELINE,
@@ -16,11 +15,12 @@ export const createTimeline = (startDate, endDate) => dispatch => {
             startDate, 
             endDate
           },
+          activeGame: res.data,
           gameView: true,
           gameStatus: 'in progress',
-          cards: res.data,
-          activeCard: [generateRandomCard(res.data)],
-          answeredCards: generateRandomCard(res.data)
+          cards: res.data.cards,
+          activeCard: [generateRandomCard(res.data.cards)],
+          answeredCards: generateRandomCard(res.data.cards)
         }
       })
     })
@@ -56,14 +56,23 @@ export const updateCard = (cardDeck) => dispatch => {
   })
 }
 
-export const endGame = (moves, timelineLimit) => dispatch => {
-  dispatch({
-    type: END_GAME, 
-    payload: {
-      gameStatus: 'ended',
-      score: calculateUserScore(moves, timelineLimit)
-    }
-  })
+export const endGame = (moves, timelineLimit, game, limit) => dispatch => {
+  let score = calculateUserScore(moves, timelineLimit)
+  let body = JSON.stringify({participant: {num_of_answers: limit, num_of_moves: moves, game_id: game.id, score: score}})
+  axios
+    .patch(
+      `${API_ROOT}/participants/${game.participants[0].id}`,
+      body
+      )
+    .then(() => {
+      dispatch({
+        type: END_GAME, 
+        payload: {
+          activeGame: [],
+          gameStatus: 'ended'
+        }
+      })
+    })
 }
 
 const generateRandomCard = (cardStack) => {
