@@ -18,7 +18,7 @@ class Profile extends React.Component {
           </div>
           <div className="stats-info">
             <div>
-              Number of moves:  {gameStat.num_of_moves}
+              Moves:  {gameStat.num_of_moves}
             </div>
             <div>
               Score: {gameStat.score}
@@ -30,12 +30,12 @@ class Profile extends React.Component {
   }
   render() {
     return (
-      <>
-        <h1>profile</h1>
+      <div className="stats-view">
+        <h1>Game Stats</h1>
         <div className="stats-container">
           {this.renderStats()}
         </div>
-      </>
+      </div>
     )
   }
 }
