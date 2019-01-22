@@ -5,7 +5,7 @@ const initialState = {
   gameStatus: 'inactive',
   score: 0,
   moves: 0,
-  timelineLimit: 3,
+  timelineLimit: 10,
   cards: [],
   activeCard: [],
   answeredCards: []
@@ -45,6 +45,7 @@ export default function(state = initialState, action) {
         ...state,
         activeGame: action.payload.activeGame,
         gameStatus: action.payload.gameStatus,
+        score: action.payload.score
       };
     default:
       return state;

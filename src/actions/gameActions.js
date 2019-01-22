@@ -8,6 +8,7 @@ export const createTimeline = (startDate, endDate) => dispatch => {
   axios
     .post(`${API_ROOT}/games`, body)
     .then(res => {
+      console.log(res.data)
       dispatch({
         type: CREATE_TIMELINE,
         payload: {
@@ -56,9 +57,9 @@ export const updateCard = (cardDeck) => dispatch => {
   })
 }
 
-export const endGame = (moves, timelineLimit, game, limit) => dispatch => {
+export const endGame = (moves, timelineLimit, game) => dispatch => {
   let score = calculateUserScore(moves, timelineLimit)
-  let body = JSON.stringify({participant: {num_of_answers: limit, num_of_moves: moves, game_id: game.id, score: score}})
+  let body = JSON.stringify({participant: {num_of_answers: timelineLimit, num_of_moves: moves, game_id: game.id, score: score}})
   axios
     .patch(
       `${API_ROOT}/participants/${game.participants[0].id}`,
@@ -69,7 +70,8 @@ export const endGame = (moves, timelineLimit, game, limit) => dispatch => {
         type: END_GAME, 
         payload: {
           activeGame: [],
-          gameStatus: 'ended'
+          gameStatus: 'ended', 
+          score
         }
       })
     })

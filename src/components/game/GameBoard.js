@@ -49,8 +49,7 @@ class GameBoard extends Component {
       this.props.moveCard(answeredCards)
 
       if(answeredCards.length === this.props.game.timelineLimit) {
-        this.props.endGame(this.props.game.moves, this.props.game.timelineLimit, this.props.game.activeGame,
-        this.props.game.timelineLimit);
+        this.props.endGame(this.props.game.moves, this.props.game.timelineLimit, this.props.game.activeGame);
       } else {
         this.props.updateCard(this.props.game.cards);
       }
