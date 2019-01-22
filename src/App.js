@@ -10,7 +10,7 @@ import GameForm from './components/game/GameForm';
 
 import GameDashboard from './components/dashBoard/GameDashboard';
 import Profile from './components/profile/Profile';
-
+import About from './components/layouts/About';
 
 import { Provider } from 'react-redux';
 import store from './store';
@@ -53,6 +53,7 @@ class App extends Component {
           <div className="App">
             <NavBar/>
             <div className="main">
+            <Route exact path="/about" component={About} />
               <Route exact path="/register" component={Register} />
               <Route exact path='/login' component={Login}/>
               <Route exact path="/chronology" component={GameMultiBoard} />
