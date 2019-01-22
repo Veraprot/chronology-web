@@ -38,9 +38,14 @@ html {
 }
 
 .timeline-form-wrapper {
-  margin: calc(45vh - 75px) auto 0 auto;
+  margin: calc(45vh - 55px) auto 0 auto;
+  
   .modal-container {
+    border: 1px solid #D8D8D8;
     margin: 0 auto;
+    -webkit-box-shadow: 6px 7px 6px -2px rgba(0,0,0,0.09);
+    -moz-box-shadow: 6px 7px 6px -2px rgba(0,0,0,0.09);
+    box-shadow: 6px 7px 6px -2px rgba(0,0,0,0.09);
   }
 }
 

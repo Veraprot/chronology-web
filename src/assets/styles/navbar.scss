@@ -4,8 +4,9 @@
   padding: 0px 30px;
   align-items: center;
   visibility: visible;
-  height: 75px;
+  height: 55px;
   background-color: rgb(3, 16, 32);
+  overflow: hidden;
 
   &.game-mode {
     display: none;
@@ -29,7 +30,7 @@
     .nav-link {
       margin-left: 50px;
     }
-    
+
     .login-container {
       margin-left: 50px;
 
@@ -53,8 +54,8 @@
         background-repeat: no-repeat;
         background-size: cover;
         border-radius: 100%;
-        height: 65px;
-        width: 65px;
+        height: 55px;
+        width: 55px;
       }
     }
   }
