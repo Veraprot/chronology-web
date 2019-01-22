@@ -1,22 +1,33 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { getProfileStats } from '../../actions/profileActions';
+import {suffixConverter} from '../common/suffixConverter'
 
 class Profile extends React.Component {
   componentDidMount = () => {
     this.props.getProfileStats();
   }
 
+  convertDate = (start, end) => {
+    let startCentury = suffixConverter(start.split("-")[0][0])
+    let endCentury = suffixConverter(end.split("-")[0] / 100)    
+
+    if(startCentury !== endCentury) {
+      return `${startCentury}-${endCentury} Century`
+    } else {
+      return `${startCentury} Century`
+    }
+  }
+
   renderStats = () => {
-    console.log(this.props.profile.gameStats)
     return this.props.profile.gameStats.map(gameStat => {
       return(
         <div key={gameStat.id} className="stats-inner-container">
           <div className="timeline-container">
-            <span>{gameStat.game.start}</span>
-            <span>{gameStat.game.end}</span>
+            <span>{this.convertDate(gameStat.game.start, gameStat.game.end)}</span>
           </div>
           <div className="stats-info">
+            {this.convertDate(gameStat.game.start, gameStat.game.end)}
             <div>
               Moves:  {gameStat.num_of_moves}
             </div>
