@@ -38,8 +38,7 @@ class NewGameForm extends React.Component {
     let start = sortedStart[0]
     let end = sortedEnd[this.state.endDate.length - 1]
     console.log(start, end)
-    this.props.setGameCreator(this.props.auth.user.user_id)
-    this.props.createNewGame(start, end)
+    this.props.createNewGame(start, end, this.props.auth.user.user_id)
   }
 
   ignoreExit = event => {

@@ -54,10 +54,10 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path='/login' component={Login}/>
               <Route exact path="/game" component={GameIndex} />
-              <Route exact path="/dashboard" component={GameDashboard} />
               <Route exact path="/chronology" component={GameMultiBoard} />
               <Switch>
-                <PrivateRoute exact path="/profile" component={Profile} />
+                <PrivateRoute exact path="/dashboard" component={GameDashboard} />
+                <PrivateRoute exact path="/" component={Profile} />
               </Switch>
             </div>
           </div>

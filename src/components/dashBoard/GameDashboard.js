@@ -44,11 +44,11 @@ class GameDashoard extends Component {
 
   handleClick = game => {
     console.log(game)
-    if(game.participants[0].user_id != this.props.auth.user.user_id &&
+    if(game.admin != this.props.auth.user.user_id &&
       game.participants.length < 2
       ) {
       this.props.setActiveGame(game)
-      this.props.addParticipant(game.id)
+      this.props.addParticipant(game.id, this.props.auth.user.user_id)
       // this.props.history.push('/chronology')
     } else {
       console.log('something went wrong')
@@ -57,12 +57,13 @@ class GameDashoard extends Component {
 
   handleReceivedGame = response => {
     const { game } = response;
+    console.log('received game', game)
     let games = [...this.props.dashboard.games, game]
     this.props.updateGames(games)
-    console.log(this.props.auth.user.user_id)
-    console.log(this.props.dashboard.gameCreator)
-    if(this.props.auth.user.user_id == this.props.dashboard.gameCreator) {
-      this.props.addParticipant(game.id)
+    // console.log(this.props.auth.user.user_id)
+    // console.log(game.admin)
+    if(this.props.auth.user.user_id == game.admin) {
+      this.props.addParticipant(game.id, game.admin)
     }
   };
 
@@ -72,7 +73,11 @@ class GameDashoard extends Component {
     const game = games.find(
       game => game.id === participant.game_id
     );
+    console.log('received participants')
+    console.log(games)
+    console.log(games.indexOf(game))
     game.participants = [...game.participants, participant];
+    // this.props.updateGames(newGames)
   };
 
   toggleNewGame = (e) => {
@@ -81,6 +86,7 @@ class GameDashoard extends Component {
   }
 
   render = () => {
+    console.log('game dashboard render')
     console.log(this.props)
     const { games, activeGame } = this.props.dashboard;
     return (

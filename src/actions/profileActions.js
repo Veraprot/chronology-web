@@ -1,5 +1,9 @@
+import axios from 'axios';
+import { API_ROOT } from '../constants';
+
 import {
-  CLEAR_CURRENT_PROFILE
+  CLEAR_CURRENT_PROFILE, 
+  GET_STATS
 } from './types';
 
 
@@ -9,3 +13,15 @@ export const clearCurrentProfile = () => {
     type: CLEAR_CURRENT_PROFILE
   };
 };
+
+export const getProfileStats = () => dispatch => {
+  axios
+    .get(`${API_ROOT}/participants`)
+    .then(res => {
+      dispatch({
+        type: GET_STATS,
+        payload: res.data
+      })
+    })
+    .catch(err => console.log(err))
+}

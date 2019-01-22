@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authActions';
 import TextFieldGroup from '../common/TextFieldGroup';
+import { Link } from 'react-router-dom'
+import { Button, Form } from 'semantic-ui-react'
+
 import { withRouter } from "react-router-dom";
 
 class Login extends Component {
@@ -18,13 +21,13 @@ class Login extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/profile');
+      this.props.history.push('/');
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/profile');
+      this.props.history.push('/');
     }
 
     if (nextProps.errors) {
@@ -43,7 +46,7 @@ class Login extends Component {
 
     this.props.loginUser(userData);
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/profile');
+      this.props.history.push('/');
     }
   }
 
@@ -56,43 +59,43 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="login">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Log In</h1>
-              <p className="lead text-center">
-                Sign in to play game 
-              </p>
-              <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="username"
-                  name="username"
-                  type="username"
-                  value={this.state.username}
-                  onChange={this.onChange}
-                  error={errors.username}
-                />
-                <TextFieldGroup
-                  placeholder="Email Address"
-                  name="email"
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.onChange}
-                  error={errors.email}
-                />
+      <div className="auth-form login">
+        <div className="form-container">
+          <h1 className="display-4 text-center">Log In</h1>
+          <p className="lead text-center">
+            Sign in to play game 
+          </p>
+          <Form onSubmit={this.onSubmit}>
+            <TextFieldGroup
+              placeholder="username"
+              name="username"
+              type="text"
+              value={this.state.username}
+              onChange={this.onChange}
+              error={errors.username}
+            />
+            <TextFieldGroup
+              placeholder="Email Address"
+              name="email"
+              type="email"
+              value={this.state.email}
+              onChange={this.onChange}
+              error={errors.email}
+            />
 
-                <TextFieldGroup
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.onChange}
-                  error={errors.password}
-                />
-                <input type="submit" className="btn btn-info btn-block mt-4" />
-              </form>
-            </div>
+            <TextFieldGroup
+              placeholder="Password"
+              name="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.onChange}
+              error={errors.password}
+            />
+            <Button type="submit" className="form-btn login-btn">Submit </Button>
+          </Form>
+          <div className="bottom-form-section sign-up-section">
+            <span className="info-text">Don't have an account?</span>
+            <Link to={'/register'}>Sign Up</Link>
           </div>
         </div>
       </div>
