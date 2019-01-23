@@ -12,13 +12,16 @@ class Profile extends React.Component {
   }
 
   convertDate = (start, end) => {
-    let startCentury = suffixConverter(start.split("-")[0][0])
-    let endCentury = suffixConverter(end.split("-")[0] / 100)    
-
+    let startCentury = Math.floor(parseInt(start.split("-")[0]) / 100) + 1
+    let endCentury = Math.floor(parseInt(end.split("-")[0]) / 100)
+    // let startCentury = suffixConverter(start.split("-")[0][0])
+    // let endCentury = suffixConverter(end.split("-")[0] / 100)    
+    console.log(startCentury, endCentury)
+    debugger
     if(startCentury !== endCentury) {
-      return `${startCentury}-${endCentury} Century`
+      return `${suffixConverter(startCentury)}-${suffixConverter(endCentury)} Century`
     } else {
-      return `${startCentury} Century`
+      return `${suffixConverter(endCentury)} Century`
     }
   }
 
@@ -32,6 +35,7 @@ class Profile extends React.Component {
   }
 
   renderStats = () => {
+    console.log(this.props.profile)
     return this.props.profile.gameStats.map(gameStat => {
       return(
         <div key={gameStat.id} className="stats-inner-container">
