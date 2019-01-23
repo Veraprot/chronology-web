@@ -24,10 +24,12 @@ class Profile extends React.Component {
       return(
         <div key={gameStat.id} className="stats-inner-container">
           <div className="timeline-container">
-            <span>{this.convertDate(gameStat.game.start, gameStat.game.end)}</span>
+            <div className="timeline">
+              <span>{this.convertDate(gameStat.game.start, gameStat.game.end)}</span>
+            </div>
           </div>
-          <div className="stats-info">
-            <div>
+          <div className="stats-info-container">
+            <div className="stats-info">
               Moves:  {gameStat.num_of_moves}
             </div>
             <div>
