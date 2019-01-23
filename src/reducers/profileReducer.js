@@ -1,11 +1,13 @@
 import {
   GET_PROFILE,
   CREATE_PROFILE,
-  CLEAR_CURRENT_PROFILE
+  CLEAR_CURRENT_PROFILE, 
+  GET_STATS
 } from '../actions/types';
 
 const initialState = {
   profile: null,
+  gameStats: []
 };
 
 export default function(state = initialState, action) {
@@ -24,6 +26,11 @@ export default function(state = initialState, action) {
         ...state,
         profile: null
       };
+    case GET_STATS:
+    return {
+      ...state,
+      gameStats: action.payload
+    };
     default:
       return state;
   }

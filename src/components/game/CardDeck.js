@@ -40,7 +40,9 @@ class CardDeck extends Component {
                           )}>
                           <div className="flip-card-inner">
                             <div className="flip-card-front">
-                               {`${card.event}`} 
+                               <div className="front-inner-container">
+                                {`${card.event}`} 
+                               </div>
                             </div>
                             <div className="flip-card-back">
                               {`${card.date}`}

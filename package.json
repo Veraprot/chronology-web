@@ -10,6 +10,7 @@
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
+    "react-actioncable-provider": "^1.0.3",
     "react-beautiful-dnd": "^10.0.3",
     "react-dnd": "^7.0.2",
     "react-dnd-html5-backend": "^7.0.2",

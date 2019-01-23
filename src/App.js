@@ -6,8 +6,11 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 import { clearCurrentProfile } from './actions/profileActions';
 import PrivateRoute from './components/common/PrivateRoute';
 import GameIndex from './components/game/GameIndex';
-import Profile from './components/profile/Profile';
+import GameForm from './components/game/GameForm';
 
+import GameDashboard from './components/dashBoard/GameDashboard';
+import Profile from './components/profile/Profile';
+import About from './components/layouts/About';
 
 import { Provider } from 'react-redux';
 import store from './store';
@@ -18,6 +21,7 @@ import './assets/styles/App.scss';
 import NavBar from './components/layouts/NavBar'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
+import GameMultiBoard from './components/multiPlayer/GameMultiBoard';
 
 
 // Check for token
@@ -49,11 +53,15 @@ class App extends Component {
           <div className="App">
             <NavBar/>
             <div className="main">
+            <Route exact path="/about" component={About} />
               <Route exact path="/register" component={Register} />
               <Route exact path='/login' component={Login}/>
-              <Route exact path="/game" component={GameIndex} />
+              <Route exact path="/chronology" component={GameMultiBoard} />
               <Switch>
-                <PrivateRoute exact path="/profile" component={Profile} />
+                <PrivateRoute exact path="/" component={GameIndex} />
+                <PrivateRoute exact path="/dashboard" component={GameDashboard} />
+                <PrivateRoute exact path="/stats" component={Profile} />
+                {/* <PrivateRoute exact path="/" component={(props) => <GameForm {...props} module={false}/>} /> */}
               </Switch>
             </div>
           </div>

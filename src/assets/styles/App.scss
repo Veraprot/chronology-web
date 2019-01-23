@@ -1,9 +1,12 @@
 @import url('navbar.scss');
+@import url('game-dashboard.scss');
 @import url('game-board.scss');
-
+@import url('forms.scss');
+@import url('profile-stats.scss');
 html {
   height: 100%;
   body {
+    background-color: rgb(245, 245, 245);
     min-height: 100%;
   }
 }
@@ -24,9 +27,31 @@ html {
   left: 0;
   z-index: 3;
   background-color: rgba(0, 0, 0, 0.8);
+  
+  &.disabled {
+    display: none;
+  }
 
   .modal-container {
     margin: 45vh auto 0 auto;
+  }
+}
+
+.timeline-form-wrapper {
+  margin: calc(45vh - 55px) auto 0 auto;
+
+  .modal-container {
+    border: 1px solid #D8D8D8;
+    margin: 0 auto;
+    -webkit-box-shadow: 6px 7px 6px -2px rgba(0,0,0,0.09);
+    -moz-box-shadow: 6px 7px 6px -2px rgba(0,0,0,0.09);
+    box-shadow: 6px 7px 6px -2px rgba(0,0,0,0.09);
+  }
+}
+
+.modal-wrapper, 
+.timeline-form-wrapper {  
+  .modal-container {
     padding: 40px 20px;
     width: 60%;
     background-color: white;
@@ -37,6 +62,33 @@ html {
       justify-content: center;
       width: 100%;
       text-align: center;
+    }
+  }
+}
+
+.about-wrapper {
+  width: 80%;
+  max-width: 800px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-evenly;
+  height: 100vh;
+  background-color: #FFF;
+  border-radius: 7px;
+  -webkit-box-shadow: 6px 7px 6px -2px rgba(0,0,0,0.09);
+  -moz-box-shadow: 6px 7px 6px -2px rgba(0,0,0,0.09);
+  box-shadow: 6px 7px 6px -2px rgba(0,0,0,0.09);
+
+  .about-container {
+    .game-info {
+      font-size: 20px;
+      line-height: 24px;
+
+      .info-link {
+        margin-left: 5px;
+      }
     }
   }
 }

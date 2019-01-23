@@ -5,7 +5,7 @@ const initialState = {
   gameStatus: 'inactive',
   score: 0,
   moves: 0,
-  timelineLimit: 3,
+  timelineLimit: 10,
   cards: [],
   activeCard: [],
   answeredCards: []
@@ -14,8 +14,10 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case CREATE_TIMELINE:
+      console.log(action.payload.activeGame)
       return {
         ...state,
+        activeGame: action.payload.activeGame,
         gameView: action.payload.gameView,
         gameStatus: action.payload.gameStatus,
         cards: action.payload.cards,
@@ -41,6 +43,7 @@ export default function(state = initialState, action) {
       case END_GAME:
       return {
         ...state,
+        activeGame: action.payload.activeGame,
         gameStatus: action.payload.gameStatus,
         score: action.payload.score
       };

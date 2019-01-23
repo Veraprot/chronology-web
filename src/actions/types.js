@@ -1,10 +1,18 @@
 export const GET_PROFILE = 'GET_PROFILE';
 export const CREATE_PROFILE = 'CREATE_PROFILE';
+export const GET_STATS = 'GET_STATS';
+
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const CREATE_TIMELINE = 'CREATE_TIMELINE';
 export const UPDATE_ACTIVE_CARD = 'UPDATE_ACTIVE_CARD';
 export const ANSWER_CARD = 'ANSWER_CARD';
 export const REGISTER_MOVE = 'REGISTER_MOVE';
 export const END_GAME = 'END_GAME';
+
+export const GET_GAMES = 'GET_GAMES';
+export const SET_ACTIVE_GAME = 'SET_ACTIVE_GAME';
+export const SET_GAME_CREATOR = 'SET_GAME_CREATOR';
+
+
 export const CLEAR_CURRENT_PROFILE = 'CLEAR_CURRENT_PROFILE';
 export const GET_ERRORS = 'GET_ERRORS';

@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 class GameOver extends React.Component {
 
   hideModule = () => {
-    window.location.href = '/'
+    window.location.href = '/stats'
   }
 
   ignoreExit = event => {

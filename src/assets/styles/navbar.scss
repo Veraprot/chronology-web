@@ -1,16 +1,62 @@
 .navbar {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0px 30px;
   align-items: center;
   visibility: visible;
-  height: 60px;
-  background-color: black;
+  height: 55px;
+  background-color: rgb(3, 16, 32);
+  overflow: hidden;
 
   &.game-mode {
     display: none;
   }
 
+  .left-menu,
+  .right-menu {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .left-menu {
+    justify-content: flex-start;
+  }
+
+  .right-menu {
+    justify-content: flex-end;
+
+    .nav-link {
+      margin-left: 50px;
+    }
+
+    .login-container {
+      margin-left: 50px;
+
+      .separator {
+        color: white;
+        margin: 0px 5px;
+      }
+    }
+  }
+  
   .nav-link {
     color: white;
+
+    &.auth-link {
+      margin-left: 0px;
+    }
+
+    &.logo {
+      .chronology-logo {
+        background: url('../images/logo.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 100%;
+        height: 55px;
+        width: 55px;
+      }
+    }
   }
 }
