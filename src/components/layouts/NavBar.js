@@ -15,7 +15,7 @@ class NavBar extends React.Component {
     return (
       <>
         <Link to={`/stats`} className="nav-link">Stats</Link>
-        <Link to={`/`} className="nav-link">Game</Link>
+        <Link to={`/game`} className="nav-link">Game</Link>
         <a
           href="/login"
           onClick={this.onLogoutClick}
@@ -48,7 +48,7 @@ class NavBar extends React.Component {
     return (
       <div className={this.props.game.gameView ? "navbar game-mode" : "navbar"}>
           <div className="left-menu">
-            <Link to={'/'} className="nav-link logo">
+            <Link to={'/stats'} className="nav-link logo">
               <div className="chronology-logo"></div>
             </Link>
           </div>

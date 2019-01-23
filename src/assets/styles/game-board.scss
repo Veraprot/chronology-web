@@ -81,7 +81,7 @@
           backface-visibility: hidden;
           border-radius: 4px;
           color: black;
-          font-size: 16px;
+          font-size: 18px;
         }
 
         .flip-card-front {
@@ -111,6 +111,11 @@
       display: flex;
       align-items: center;
       border-radius: 4px;
+
+      .card-event,
+      .card-date {
+        font-size: 18px;
+      }
     }
   }
 }

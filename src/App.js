@@ -54,11 +54,12 @@ class App extends Component {
             <NavBar/>
             <div className="main">
             <Route exact path="/about" component={About} />
+              <Route exact path="/" component={Profile} />
               <Route exact path="/register" component={Register} />
               <Route exact path='/login' component={Login}/>
               <Route exact path="/chronology" component={GameMultiBoard} />
               <Switch>
-                <PrivateRoute exact path="/" component={GameIndex} />
+                <PrivateRoute exact path="/game" component={GameIndex} />
                 <PrivateRoute exact path="/dashboard" component={GameDashboard} />
                 <PrivateRoute exact path="/stats" component={Profile} />
                 {/* <PrivateRoute exact path="/" component={(props) => <GameForm {...props} module={false}/>} /> */}

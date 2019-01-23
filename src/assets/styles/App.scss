@@ -1,13 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('navbar.scss');
 @import url('game-dashboard.scss');
 @import url('game-board.scss');
 @import url('forms.scss');
 @import url('profile-stats.scss');
+
 html {
   height: 100%;
   body {
     background-color: rgb(245, 245, 245);
     min-height: 100%;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    div, 
+    span, 
+    a {
+      font-family: 'Roboto', sans-serif;
+    }
   }
 }
 

@@ -27,7 +27,6 @@ class Profile extends React.Component {
             <span>{this.convertDate(gameStat.game.start, gameStat.game.end)}</span>
           </div>
           <div className="stats-info">
-            {this.convertDate(gameStat.game.start, gameStat.game.end)}
             <div>
               Moves:  {gameStat.num_of_moves}
             </div>
