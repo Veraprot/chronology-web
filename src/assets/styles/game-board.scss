@@ -32,6 +32,15 @@
       padding: 16px;
       height: 300px;
       max-width: 200px;
+
+      .card-date-container {
+        padding: 15px 30px;
+        border-radius: 50%;
+        background-color: rgba(0,0,0,0.8);
+        .card-date {
+          color: white;
+        }
+      }
     }
   }
   
@@ -78,6 +87,12 @@
         .flip-card-front {
           z-index: 2;
           background-color:#f5e399;
+          overflow-y: scroll;
+          overflow-x: hidden;
+
+          &::-webkit-scrollbar {
+            display: none;
+           }
         }
         
         .flip-card-back {

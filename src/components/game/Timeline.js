@@ -48,8 +48,10 @@ class Timeline extends Component {
                         <div className="card-event">
                           {`${card.event}`}
                         </div>
-                        <div className="card-date">
-                          {`${card.date}`}
+                        <div className="card-date-container">
+                          <div className="card-date">
+                            {`${card.date}`}
+                          </div>
                         </div>
                       </div>
                     )}

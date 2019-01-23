@@ -41,6 +41,7 @@ export const addParticipant = (game_id, user_id) => dispatch =>{
 
 export const createNewGame = (startDate, endDate, user_id) => dispatch => {
   let body = JSON.stringify({game: {start_date: startDate, end_date: endDate, admin: user_id}})
+  console.log(body)
   axios
     .post(`${API_ROOT}/games`, body)
     .then(res => {

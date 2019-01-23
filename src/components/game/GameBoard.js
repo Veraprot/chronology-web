@@ -116,14 +116,14 @@ class GameBoard extends Component {
   }
 
   render() {
-    console.log(this.state)
+    console.log(this.props)
     return (
       <>
-        <div className="score-board">
+        {/* <div className="score-board">
           <div className="timer">
             Time: {this.state.timer}
           </div>
-        </div>
+        </div> */}
         <DragDropContext onDragEnd={this.onDragEnd}>
           <div className="board-container">
             <CardDeck onDragEnd={this.onDragEnd} answered={this.state.answered}/>

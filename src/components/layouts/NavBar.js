@@ -14,7 +14,8 @@ class NavBar extends React.Component {
   authLinks = () => {
     return (
       <>
-        <Link to={`/game`} className="nav-link">Game</Link>
+        <Link to={`/stats`} className="nav-link">Stats</Link>
+        <Link to={`/`} className="nav-link">Game</Link>
         <a
           href="/login"
           onClick={this.onLogoutClick}
