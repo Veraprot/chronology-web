@@ -2,6 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { getProfileStats } from '../../actions/profileActions';
 import {suffixConverter} from '../common/suffixConverter'
+import { Button } from 'semantic-ui-react'
+import {createTimeline } from '../../actions/gameActions';
+import { withRouter } from 'react-router'
 
 class Profile extends React.Component {
   componentDidMount = () => {
@@ -19,15 +22,22 @@ class Profile extends React.Component {
     }
   }
 
+  repeatGame = (e) => {
+    e.preventDefault();
+    let start = document.getElementById("timeline-dates").dataset.startdate
+    let end = document.getElementById("timeline-dates").dataset.enddate
+    this.props.createTimeline(start, end, this.props.history)
+    console.log(start, end)
+    console.log(this.props)
+  }
+
   renderStats = () => {
     return this.props.profile.gameStats.map(gameStat => {
       return(
         <div key={gameStat.id} className="stats-inner-container">
-          <div className="timeline-container">
-            <div className="timeline">
-              <span>{this.convertDate(gameStat.game.start, gameStat.game.end)}</span>
-            </div>
-          </div>
+          <ul className="timeline-container">
+            <li id="timeline-dates" data-startdate={`${gameStat.game.start}`} data-enddate={`${gameStat.game.end}`}>{this.convertDate(gameStat.game.start, gameStat.game.end)}</li>
+          </ul>
           <div className="stats-info-container">
             <div className="stats-info">
               Moves:  {gameStat.num_of_moves}
@@ -35,6 +45,7 @@ class Profile extends React.Component {
             <div>
               Score: {gameStat.score}
             </div>
+            <Button className="repeat-game" onClick={this.repeatGame}>Play Again</Button>
           </div>
         </div>
       )
@@ -53,10 +64,10 @@ class Profile extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  game: state.game,
   profile: state.profile
 });
 
 
-export default connect(mapStateToProps, {getProfileStats})(
-  (Profile)
-);
+export default connect(mapStateToProps, 
+  {getProfileStats, createTimeline})(withRouter(Profile));

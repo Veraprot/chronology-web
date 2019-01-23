@@ -3,8 +3,9 @@ import { API_ROOT } from '../constants';
 
 import {CREATE_TIMELINE, REGISTER_MOVE, UPDATE_ACTIVE_CARD, ANSWER_CARD, END_GAME} from './types';
 
-export const createTimeline = (startDate, endDate) => dispatch => {
+export const createTimeline = (startDate, endDate, history) => dispatch => {
   let body = JSON.stringify({ game: {start_date: startDate, end_date: endDate}})
+  console.log('hiii')
   axios
     .post(`${API_ROOT}/games`, body)
     .then(res => {
@@ -24,6 +25,7 @@ export const createTimeline = (startDate, endDate) => dispatch => {
           answeredCards: generateRandomCard(res.data.cards)
         }
       })
+      history.push('/game')
     })
     .catch(err => {
       console.log(err)

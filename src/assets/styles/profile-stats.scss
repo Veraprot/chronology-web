@@ -29,6 +29,7 @@
         justify-content: center;
         align-items: center;
         // background-color: #f5e399;
+        list-style-type: none;
         border-bottom: 1px solid #D8D8D8;
       }
 
@@ -43,6 +44,7 @@
 
       .stats-info-container, 
       .timeline-container {
+        margin: 0;
         width: 100%;
         padding: 10px;
         font-size: 20px;
