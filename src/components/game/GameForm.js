@@ -41,7 +41,7 @@ class GameForm extends React.Component {
 
   hideModule = () => {
     console.log(window.location)
-    window.location.href = '/'
+    window.location.href = '/stats'
   }
 
   ignoreExit = event => {

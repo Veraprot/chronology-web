@@ -24,6 +24,7 @@ class GameBoard extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      timer: 0,
       answered: false //rename this later 
     }
   }
@@ -49,6 +50,7 @@ class GameBoard extends Component {
       this.props.moveCard(answeredCards)
 
       if(answeredCards.length === this.props.game.timelineLimit) {
+        // this.stopTimer();
         this.props.endGame(this.props.game.moves, this.props.game.timelineLimit, this.props.game.activeGame);
       } else {
         this.props.updateCard(this.props.game.cards);
@@ -89,15 +91,46 @@ class GameBoard extends Component {
     }
   };
 
+  // componentDidMount = () => {
+  //   this.startTimer()
+  // }
+
+  // componentWillUnmount = () => {
+  //   this.stopTimer()
+  // }
+
+  startTimer = () => {
+    console.log(this.state)
+    this.time = setInterval(() => this.setState({
+      ...this.state,
+      timer: this.state.timer + 1
+    }), 1000);
+  }
+
+  stopTimer = () => {
+    this.time = clearInterval(this.state.timer)
+    this.setState({
+      ...this.state,
+      timer: 0
+    })
+  }
+
   render() {
-    console.log(this.props)
+    console.log(this.state)
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="board-container">
-          <CardDeck onDragEnd={this.onDragEnd} answered={this.state.answered}/>
-          <Timeline onDragEnd={this.onDragEnd} disabled={true}/> 
+      <>
+        <div className="score-board">
+          <div className="timer">
+            Time: {this.state.timer}
+          </div>
         </div>
-      </DragDropContext>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <div className="board-container">
+            <CardDeck onDragEnd={this.onDragEnd} answered={this.state.answered}/>
+            <Timeline onDragEnd={this.onDragEnd} disabled={true}/> 
+          </div>
+        </DragDropContext>
+      </>
     );
   }
 }

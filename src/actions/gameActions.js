@@ -58,7 +58,7 @@ export const updateCard = (cardDeck) => dispatch => {
 }
 
 export const endGame = (moves, timelineLimit, game) => dispatch => {
-  let score = calculateUserScore(moves, timelineLimit)
+  let score = calculateUserScore(moves + 1, timelineLimit)
   let body = JSON.stringify({participant: {num_of_answers: timelineLimit, num_of_moves: moves, game_id: game.id, score: score}})
   axios
     .patch(
@@ -69,6 +69,7 @@ export const endGame = (moves, timelineLimit, game) => dispatch => {
       dispatch({
         type: END_GAME, 
         payload: {
+          moves: moves + 1,
           activeGame: [],
           gameStatus: 'ended', 
           score
@@ -82,5 +83,7 @@ const generateRandomCard = (cardStack) => {
 }
 
 const calculateUserScore = (moves, timelineLimit) => {
+  console.log(moves)
+  console.log(timelineLimit)
   return Math.ceil(timelineLimit/moves * 100)
 }
