@@ -12,9 +12,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      align-items: center;
-      background-color: #FFF;
-      border-radius: 3px;
       width: 31%;
       margin: 5px;
       min-height: 200px;
@@ -25,10 +22,9 @@
       
       .timeline-container {
         display: flex;
-        height: 40%;
         justify-content: center;
         align-items: center;
-        // background-color: #f5e399;
+        height: 30%;
         list-style-type: none;
         border-bottom: 1px solid #D8D8D8;
       }
@@ -36,9 +32,9 @@
       .stats-info-container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: center;
-        height: 60%;
+        height: 70%;
         width: 100%;
       }
 

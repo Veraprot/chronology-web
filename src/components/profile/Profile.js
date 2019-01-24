@@ -14,10 +14,6 @@ class Profile extends React.Component {
   convertDate = (start, end) => {
     let startCentury = Math.floor(parseInt(start.split("-")[0]) / 100) + 1
     let endCentury = Math.floor(parseInt(end.split("-")[0]) / 100)
-    // let startCentury = suffixConverter(start.split("-")[0][0])
-    // let endCentury = suffixConverter(end.split("-")[0] / 100)    
-    console.log(startCentury, endCentury)
-    debugger
     if(startCentury !== endCentury) {
       return `${suffixConverter(startCentury)}-${suffixConverter(endCentury)} Century`
     } else {
@@ -46,10 +42,10 @@ class Profile extends React.Component {
             <div className="stats-info">
               Moves:  {gameStat.num_of_moves}
             </div>
-            <div>
+            <div className="stats-info">
               Score: {gameStat.score}
             </div>
-            <Button className="repeat-game" onClick={this.repeatGame}>Play Again</Button>
+            <Button className="stats-info repeat-btn" onClick={this.repeatGame}>Play Again</Button>
           </div>
         </div>
       )
