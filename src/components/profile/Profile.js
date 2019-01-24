@@ -31,7 +31,6 @@ class Profile extends React.Component {
   }
 
   renderStats = () => {
-    console.log(this.props.profile)
     return this.props.profile.gameStats.map(gameStat => {
       return(
         <div key={gameStat.id} className="stats-inner-container">
@@ -51,12 +50,20 @@ class Profile extends React.Component {
       )
     })
   }
+
+  emptyStats = () => {
+    return(
+      <div>Statr a new game button will be here</div>
+    )
+  }
+  
   render() {
+    const { gameStats } = this.props.profile
     return (
       <div className="stats-view">
         <h1>Game Stats</h1>
         <div className="stats-container">
-          {this.renderStats()}
+          {gameStats.length > 0 ? this.renderStats() : this.emptyStats()}
         </div>
       </div>
     )
