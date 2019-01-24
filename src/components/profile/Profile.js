@@ -21,6 +21,11 @@ class Profile extends React.Component {
     }
   }
 
+  startNewGame = (e) => {
+    e.preventDefault();
+    this.props.history.push('/game')
+  }
+
   repeatGame = (e) => {
     e.preventDefault();
     let start = document.getElementById("timeline-dates").dataset.startdate
@@ -33,27 +38,32 @@ class Profile extends React.Component {
   renderStats = () => {
     return this.props.profile.gameStats.map(gameStat => {
       return(
-        <div key={gameStat.id} className="stats-inner-container">
-          <ul className="timeline-container">
-            <li id="timeline-dates" data-startdate={`${gameStat.game.start}`} data-enddate={`${gameStat.game.end}`}>{this.convertDate(gameStat.game.start, gameStat.game.end)}</li>
-          </ul>
-          <div className="stats-info-container">
-            <div className="stats-info">
-              Moves:  {gameStat.num_of_moves}
+        <>
+          <h1>Game Stats</h1>
+          <div className="stats-container">
+            <div key={gameStat.id} className="stats-inner-container">
+              <ul className="timeline-container">
+                <li id="timeline-dates" data-startdate={`${gameStat.game.start}`} data-enddate={`${gameStat.game.end}`}>{this.convertDate(gameStat.game.start, gameStat.game.end)}</li>
+              </ul>
+              <div className="stats-info-container">
+                <div className="stats-info">
+                  Moves:  {gameStat.num_of_moves}
+                </div>
+                <div className="stats-info">
+                  Score: {gameStat.score}
+                </div>
+                <Button className="stats-info repeat-btn" onClick={this.repeatGame}>Play Again</Button>
+              </div>
             </div>
-            <div className="stats-info">
-              Score: {gameStat.score}
-            </div>
-            <Button className="stats-info repeat-btn" onClick={this.repeatGame}>Play Again</Button>
           </div>
-        </div>
+        </>
       )
     })
   }
 
   emptyStats = () => {
     return(
-      <div>Statr a new game button will be here</div>
+      <Button onClick={this.startNewGame}>Play new game!</Button>
     )
   }
   
@@ -61,10 +71,7 @@ class Profile extends React.Component {
     const { gameStats } = this.props.profile
     return (
       <div className="stats-view">
-        <h1>Game Stats</h1>
-        <div className="stats-container">
           {gameStats.length > 0 ? this.renderStats() : this.emptyStats()}
-        </div>
       </div>
     )
   }
