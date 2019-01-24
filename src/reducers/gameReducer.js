@@ -5,7 +5,7 @@ const initialState = {
   gameStatus: 'inactive',
   score: 0,
   moves: 0,
-  timelineLimit: 4,
+  timelineLimit: 5,
   cards: [],
   activeCard: [],
   answeredCards: []

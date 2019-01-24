@@ -62,9 +62,12 @@ class Profile extends React.Component {
   }
 
   emptyStats = () => {
-    return(
-      <Button onClick={this.startNewGame}>Play new game!</Button>
-    )
+    const { isAuthenticated } = this.props.auth;
+    if(isAuthenticated) {
+      return(
+        <Button onClick={this.startNewGame}>Play new game!</Button>
+      )
+    }
   }
   
   render() {
@@ -79,7 +82,8 @@ class Profile extends React.Component {
 
 const mapStateToProps = state => ({
   game: state.game,
-  profile: state.profile
+  profile: state.profile,
+  auth: state.auth
 });
 
 
