@@ -36,12 +36,13 @@ class Profile extends React.Component {
   }
 
   renderStats = () => {
-    return this.props.profile.gameStats.map(gameStat => {
-      return(
-        <>
-          <h1>Game Stats</h1>
-          <div className="stats-container">
-            <div key={gameStat.id} className="stats-inner-container">
+    return (
+      <>
+        <h1>Game Stats</h1>
+        {
+          this.props.profile.gameStats.map(gameStat => 
+            <div key={gameStat.id} className="stats-container">
+            <div className="stats-inner-container">
               <ul className="timeline-container">
                 <li id="timeline-dates" data-startdate={`${gameStat.game.start}`} data-enddate={`${gameStat.game.end}`}>{this.convertDate(gameStat.game.start, gameStat.game.end)}</li>
               </ul>
@@ -56,9 +57,10 @@ class Profile extends React.Component {
               </div>
             </div>
           </div>
-        </>
-      )
-    })
+          )
+        }
+      </>
+    )
   }
 
   emptyStats = () => {

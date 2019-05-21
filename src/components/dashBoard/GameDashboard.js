@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ActionCable } from 'react-actioncable-provider';
-import { Button, Form } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { withRouter } from "react-router-dom";
 
 import {connect} from 'react-redux'
@@ -44,7 +44,7 @@ class GameDashoard extends Component {
 
   handleClick = game => {
     console.log(game)
-    if(game.admin != this.props.auth.user.user_id &&
+    if(game.admin !== this.props.auth.user.user_id &&
       game.participants.length < 2
       ) {
       this.props.setActiveGame(game)
@@ -62,7 +62,7 @@ class GameDashoard extends Component {
     this.props.updateGames(games)
     // console.log(this.props.auth.user.user_id)
     // console.log(game.admin)
-    if(this.props.auth.user.user_id == game.admin) {
+    if(this.props.auth.user.user_id === game.admin) {
       this.props.addParticipant(game.id, game.admin)
     }
   };
@@ -88,7 +88,7 @@ class GameDashoard extends Component {
   render = () => {
     console.log('game dashboard render')
     console.log(this.props)
-    const { games, activeGame } = this.props.dashboard;
+    const { games } = this.props.dashboard;
     return (
       <>
         <ActionCable
