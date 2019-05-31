@@ -5,11 +5,9 @@ import {CREATE_TIMELINE, REGISTER_MOVE, UPDATE_ACTIVE_CARD, ANSWER_CARD, END_GAM
 
 export const createTimeline = (startDate, endDate, history) => dispatch => {
   let body = JSON.stringify({ game: {start_date: startDate, end_date: endDate}})
-  console.log('hiii')
   axios
     .post(`${API_ROOT}/games`, body)
     .then(res => {
-      console.log(res.data)
       dispatch({
         type: CREATE_TIMELINE,
         payload: {
@@ -85,7 +83,5 @@ const generateRandomCard = (cardStack) => {
 }
 
 const calculateUserScore = (moves, timelineLimit) => {
-  console.log(moves)
-  console.log(timelineLimit)
   return Math.ceil(timelineLimit/moves * 100)
 }
