@@ -30,13 +30,14 @@
       position: relative;
       margin: 10px 5px;
       padding: 16px;
-      height: 300px;
-      max-width: 200px;
+      height: 200px;
+      max-width: 100px;
 
       .card-date-container {
-        padding: 15px 30px;
+        padding: 8px 15px;
         border-radius: 50%;
         background-color: rgba(0,0,0,0.8);
+
         .card-date {
           color: white;
         }
@@ -111,9 +112,16 @@
       align-items: center;
       border-radius: 4px;
 
+      .card-event {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+      }
+
       .card-event,
       .card-date {
-        font-size: 18px;
+        font-size: 14px;
       }
     }
   }

@@ -91,14 +91,6 @@ class GameBoard extends Component {
     }
   };
 
-  // componentDidMount = () => {
-  //   this.startTimer()
-  // }
-
-  // componentWillUnmount = () => {
-  //   this.stopTimer()
-  // }
-
   startTimer = () => {
     console.log(this.state)
     this.time = setInterval(() => this.setState({
@@ -119,13 +111,9 @@ class GameBoard extends Component {
     console.log(this.props)
     return (
       <>
-        {/* <div className="score-board">
-          <div className="timer">
-            Time: {this.state.timer}
-          </div>
-        </div> */}
         <DragDropContext onDragEnd={this.onDragEnd}>
           <div className="board-container">
+            <Timeline onDragEnd={this.onDragEnd} disabled={true}/> 
             <CardDeck onDragEnd={this.onDragEnd} answered={this.state.answered}/>
             <Timeline onDragEnd={this.onDragEnd} disabled={true}/> 
           </div>

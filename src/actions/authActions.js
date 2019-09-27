@@ -67,22 +67,3 @@ export const setCurrentUser = decoded => {
   };
 };
 
-// // get info of logged in user 
-// export const findCurrentUser = () => {
-//   return (dispatch) => {
-//     return fetch(BACKEND, {
-//       method: "POST",
-//       headers: {
-//         Authorization: `Bearer ${localStorage.token}`
-//       }
-//     })
-//       .then(res => res.json())
-//       .then(json => {
-//         dispatch({
-//           type: FIND_CURRENT_USER,
-//           payload: json
-//         })
-//       })
-
-//   }
-// }
