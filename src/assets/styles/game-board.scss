@@ -53,8 +53,8 @@
       justify-content: center;
       perspective: 1000px;
       background: transparent;
-      height: 332px;
-      max-width: 232px;
+      height: 200px;
+      max-width: 120px;
 
       &.answered {
         .flip-card-inner {
@@ -76,12 +76,12 @@
           display: flex;
           justify-content: center;
           position: absolute;
-          width: calc(100% - 32px);
-          height: calc(100% - 32px);
+          width: 100%;
+          height: 100%;
           backface-visibility: hidden;
           border-radius: 4px;
           color: black;
-          font-size: 18px;
+          font-size: 14px;
         }
 
         .flip-card-front {
