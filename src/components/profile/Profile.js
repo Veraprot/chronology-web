@@ -23,7 +23,7 @@ class Profile extends React.Component {
 
   startNewGame = (e) => {
     e.preventDefault();
-    this.props.history.push('/game')
+    console.log("rewrite this logic")
   }
 
   repeatGame = (e) => {
