@@ -3,8 +3,12 @@ import {connect} from 'react-redux'
 import GameForm from './GameForm'
 import GameBoard from './GameBoard'
 import GameOver from './GameOver'
+import { getGame } from '../../actions/gameActions';
 
 class GameIndex extends React.Component {
+  componentDidMount = () => {
+    this.props.getGame()
+  }
   render() {
     return (
       <>
@@ -27,6 +31,6 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, {})(
+export default connect(mapStateToProps, {getGame})(
   (GameIndex)
 );

@@ -80,6 +80,10 @@ export const endGame = (moves, timelineLimit, game) => dispatch => {
     })
 }
 
+export const getGame = () => {
+  console.log('lalalalalal')
+}
+
 const generateRandomCard = (cardStack) => {
   return cardStack[Math.floor(Math.random() * cardStack.length)]
 }
