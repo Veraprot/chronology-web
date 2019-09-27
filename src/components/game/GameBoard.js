@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import CardDeck from './CardDeck'
 import Timeline from './Timeline'
+import OpponentTimeline from './OpponentTimeline'
 import { DragDropContext } from 'react-beautiful-dnd';
 import {registerUserMove, moveCard, updateCard, endGame } from '../../actions/gameActions';
 
@@ -111,13 +112,13 @@ class GameBoard extends Component {
     console.log(this.props)
     return (
       <>
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <div className="board-container">
-            <Timeline onDragEnd={this.onDragEnd} disabled={true}/> 
-            <CardDeck onDragEnd={this.onDragEnd} answered={this.state.answered}/>
-            <Timeline onDragEnd={this.onDragEnd} disabled={true}/> 
-          </div>
-        </DragDropContext>
+        <div className="board-container">
+          <OpponentTimeline/> 
+          <DragDropContext onDragEnd={this.onDragEnd}>
+              <CardDeck onDragEnd={this.onDragEnd} answered={this.state.answered}/>
+              <Timeline onDragEnd={this.onDragEnd} disabled={true}/> 
+          </DragDropContext>
+        </div>
       </>
     );
   }
