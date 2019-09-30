@@ -56,7 +56,6 @@ class GameForm extends React.Component {
     )
   }
   render() {
-    console.log(this.props)
     return (
       <div className={this.props.module ? "modal-wrapper" : "timeline-form-wrapper"} onClick={this.hideModule}>
         <div className="modal-container" onClick={this.ignoreExit}>

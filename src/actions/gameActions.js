@@ -5,7 +5,6 @@ import {CREATE_TIMELINE, REGISTER_MOVE, UPDATE_ACTIVE_CARD, ANSWER_CARD, END_GAM
 
 export const createTimeline = (startDate, endDate, history) => dispatch => {
   let body = JSON.stringify({ game: {start_date: startDate, end_date: endDate}})
-  console.log('hiii')
   axios
     .post(`${API_ROOT}/games`, body)
     .then(res => {
@@ -80,8 +79,29 @@ export const endGame = (moves, timelineLimit, game) => dispatch => {
     })
 }
 
-export const getGame = () => {
-  console.log('lalalalalal')
+export const getGame = (game_id) => dispatch => {
+  axios
+    .get(
+      `${API_ROOT}/games/${game_id}`
+    )
+    .then(res => {
+      console.log(res.data)
+      dispatch({
+        type: CREATE_TIMELINE,
+        payload: {
+          timeline: {
+            startDate: res.data.start_date,
+            endDate: res.data.start_date 
+          },
+          activeGame: res.data,
+          gameView: true,
+          gameStatus: 'in progress',
+          cards: res.data.cards,
+          activeCard: [generateRandomCard(res.data.cards)],
+          answeredCards: generateRandomCard(res.data.cards)
+        }
+      })
+    })
 }
 
 const generateRandomCard = (cardStack) => {

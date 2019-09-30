@@ -1,20 +1,21 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import GameForm from './GameForm'
+// import GameForm from './GameForm'
 import GameBoard from './GameBoard'
 import GameOver from './GameOver'
 import { getGame } from '../../actions/gameActions';
 
 class GameIndex extends React.Component {
   componentDidMount = () => {
-    this.props.getGame()
+    this.props.getGame(this.props.match.params.id)
   }
+
   render() {
     return (
       <>
-      { this.props.game.gameStatus === 'inactive' &&
+      {/* { this.props.game.gameStatus === 'inactive' &&
         <GameForm module="true"/>
-      }
+      } */}
       { this.props.game.gameStatus === 'in progress' &&
         <GameBoard/>
       }
