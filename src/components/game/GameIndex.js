@@ -6,6 +6,7 @@ import GameOver from './GameOver'
 
 class GameIndex extends React.Component {
   render() {
+    console.log(this.props)
     return (
       <>
       { this.props.game.gameStatus === 'inactive' &&
